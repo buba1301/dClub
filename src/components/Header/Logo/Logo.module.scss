@@ -1,7 +1,5 @@
 .wrap {
-  min-width: 148px;
-  background-color: azure;
-
+  width: 148px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,5 +17,6 @@
   display: inline-block;
 
   font-size: 20px;
+  font-weight: 300;
   line-height: normal;
 }
