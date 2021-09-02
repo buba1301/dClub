@@ -1,0 +1,23 @@
+.wrap {
+  min-width: 148px;
+  background-color: azure;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.iconWrap {
+  width: 40px;
+}
+
+.textWrap {
+  width: 80px;
+
+  display: inline-block;
+
+  font-size: 20px;
+  line-height: normal;
+}

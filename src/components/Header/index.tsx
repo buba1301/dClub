@@ -2,11 +2,15 @@ import * as React from 'react';
 
 import s from './Header.module.scss';
 
+import Logo from './Logo';
+
 const Header = () => (
   <div className={s.headerWrapper}>
     <div className={s.header}>
       <div className={s.headerContainer}>
-        <div className={s.logoWrap}>1</div>
+        <div className={s.logoWrap}>
+          <Logo />
+        </div>
         <div className={s.filtersContainer}>2</div>
         <div className={s.seachContainer}>3</div>
         <div className={s.buttonContainer}>4</div>
