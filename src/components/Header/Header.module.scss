@@ -18,4 +18,27 @@
   z-index: 110;
   height: 72px;
   background-color: red;
+
+  display: grid;
+  grid-template-columns: minmax(128px, 1fr) 3fr repeat(3, minmax(auto, 178px));
+}
+
+.logoWrap {
+  background-color: blue;
+}
+
+.filtersContainer {
+  background-color: peru;
+}
+
+.seachContainer {
+  background-color: aqua;
+}
+
+.buttonContainer {
+  background-color: beige;
+}
+
+.buscketContainer {
+  background-color: rgb(139, 139, 59);
 }
