@@ -44,7 +44,10 @@ const Search = () => {
           </div>
         </div>
 
-        <div className={s.listWrap}>blablabla</div>
+        <div className={s.listWrap}>
+          <p>blablabla</p>
+          <p>blablabla</p>
+        </div>
         <div className={s.backLayer} onClick={handleClick} />
       </>
     );
