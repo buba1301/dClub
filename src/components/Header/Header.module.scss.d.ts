@@ -7,7 +7,6 @@ interface CssExports {
   headerContainer: string;
   headerWrapper: string;
   logoWrap: string;
-  searchContainer: string;
 }
 export const cssExports: CssExports;
 export default cssExports;

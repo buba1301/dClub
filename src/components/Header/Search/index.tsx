@@ -1,13 +1,11 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import * as React from 'react';
-import cn from 'classnames';
-import { GoLocation } from 'react-icons/go';
-import { GrClose } from 'react-icons/gr';
+import { GrSearch, GrClose } from 'react-icons/gr';
 
 import s from './Search.module.scss';
 
-const Search = () => {
+const Serach = () => {
   const [searchToogle, setSearchToogle] = React.useState(false);
 
   const ref = React.useRef<HTMLInputElement>(null);
@@ -18,48 +16,34 @@ const Search = () => {
     }
   }, [searchToogle]);
 
-  const className = cn({
-    [s.filtersContainer]: true,
-    [s.openInput]: searchToogle,
-  });
-
   const handleClick = () => {
     setSearchToogle((prevState) => !prevState);
   };
 
-  if (searchToogle) {
-    return (
-      <>
-        <div className={className}>
-          <div className={s.searchWrap}>
-            <div className={s.geoContainer}>
-              <GoLocation size={20} />
-            </div>
-            <div className={s.inputContainer}>
-              <input placeholder="Укажите адрес доставки" type="text" ref={ref} />
-            </div>
-            <div className={s.geoContainer}>
-              <GrClose size={20} onClick={handleClick} />
+  return (
+    <>
+      <button type="button" className={s.searchContainer} onClick={handleClick}>
+        <GrSearch size={20} />
+        <span>Поиск</span>
+      </button>
+      {searchToogle && (
+        <>
+          <div className={s.inputContainer}>
+            <div className={s.inputWrap}>
+              <div className={s.iconsLeft}>
+                <GrSearch size={20} />
+              </div>
+              <input type="text" placeholder="Ресторан, блюдо или товар" ref={ref} />
+              <div className={s.iconsRight}>
+                <GrClose size={20} onClick={handleClick} />
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className={s.listWrap}>
-          <p>blablabla</p>
-          <p>blablabla</p>
-        </div>
-        <div className={s.backLayer} onClick={handleClick} />
-      </>
-    );
-  }
-  return (
-    <div className={className} onClick={handleClick}>
-      <div className={s.geoContainer}>
-        <GoLocation size={20} />
-      </div>
-      <span className={s.addresContainer}>Адрес доставки</span>
-    </div>
+          <div className={s.backLayer} onClick={handleClick} />
+        </>
+      )}
+    </>
   );
 };
 
-export default Search;
+export default Serach;

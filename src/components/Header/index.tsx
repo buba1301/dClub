@@ -3,7 +3,8 @@ import * as React from 'react';
 import s from './Header.module.scss';
 
 import Logo from './Logo';
-import Search from './Search';
+import GeoSearch from './GeoSearch';
+import Serach from './Search';
 
 const Header = () => (
   <div className={s.headerWrapper}>
@@ -12,8 +13,8 @@ const Header = () => (
         <div className={s.logoWrap}>
           <Logo />
         </div>
-        <Search />
-        <div className={s.searchContainer}>3</div>
+        <GeoSearch />
+        <Serach />
         <div className={s.buttonContainer}>4</div>
         <div className={s.buscketContainer}>5</div>
       </div>

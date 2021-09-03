@@ -31,10 +31,6 @@
   align-items: center;
 }
 
-.searchContainer {
-  background-color: aqua;
-}
-
 .buttonContainer {
   background-color: beige;
 }
@@ -46,6 +42,6 @@
 @media (max-width: 640px) {
   .headerContainer {
     display: grid;
-    grid-template-columns: 168px 50px repeat(3, minmax(auto, 178px));
+    grid-template-columns: 168px 50px 50px repeat(2, minmax(auto, 178px));
   }
 }
