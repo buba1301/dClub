@@ -10,6 +10,14 @@ import s from './Search.module.scss';
 const Search = () => {
   const [searchToogle, setSearchToogle] = React.useState(false);
 
+  const ref = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (ref.current !== null) {
+      ref.current.focus();
+    }
+  }, [searchToogle]);
+
   const className = cn({
     [s.filtersContainer]: true,
     [s.openInput]: searchToogle,
@@ -28,7 +36,7 @@ const Search = () => {
               <GoLocation size={20} />
             </div>
             <div className={s.inputContainer}>
-              <input placeholder="Укажите адрес доставки" />
+              <input placeholder="Укажите адрес доставки" type="text" ref={ref} />
             </div>
             <div className={s.geoContainer}>
               <GrClose size={20} onClick={handleClick} />
