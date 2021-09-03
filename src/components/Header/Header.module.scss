@@ -17,6 +17,7 @@
   right: 0;
   z-index: 110;
   height: 72px;
+  border-bottom: 1px solid #e3e4e6;
 
   display: grid;
   grid-template-columns: 168px 3fr repeat(3, minmax(auto, 178px));
@@ -30,10 +31,6 @@
   align-items: center;
 }
 
-.filtersContainer {
-  background-color: peru;
-}
-
 .seachContainer {
   background-color: aqua;
 }
@@ -44,4 +41,11 @@
 
 .buscketContainer {
   background-color: rgb(139, 139, 59);
+}
+
+@media (max-width: 640px) {
+  .headerContainer {
+    display: grid;
+    grid-template-columns: 168px 50px repeat(3, minmax(auto, 178px));
+  }
 }

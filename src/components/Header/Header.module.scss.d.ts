@@ -3,7 +3,6 @@
 interface CssExports {
   buscketContainer: string;
   buttonContainer: string;
-  filtersContainer: string;
   header: string;
   headerContainer: string;
   headerWrapper: string;

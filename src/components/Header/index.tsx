@@ -3,6 +3,7 @@ import * as React from 'react';
 import s from './Header.module.scss';
 
 import Logo from './Logo';
+import Search from './Search';
 
 const Header = () => (
   <div className={s.headerWrapper}>
@@ -11,7 +12,7 @@ const Header = () => (
         <div className={s.logoWrap}>
           <Logo />
         </div>
-        <div className={s.filtersContainer}>2</div>
+        <Search />
         <div className={s.seachContainer}>3</div>
         <div className={s.buttonContainer}>4</div>
         <div className={s.buscketContainer}>5</div>
