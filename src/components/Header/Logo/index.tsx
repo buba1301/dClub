@@ -15,3 +15,4 @@ const Logo = () => (
 export default Logo;
 
 // TODO: add i18next react for text
+// TODO: add link to '/'

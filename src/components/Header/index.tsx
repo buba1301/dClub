@@ -13,7 +13,7 @@ const Header = () => (
           <Logo />
         </div>
         <Search />
-        <div className={s.seachContainer}>3</div>
+        <div className={s.searchContainer}>3</div>
         <div className={s.buttonContainer}>4</div>
         <div className={s.buscketContainer}>5</div>
       </div>

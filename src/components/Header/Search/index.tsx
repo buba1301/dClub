@@ -19,31 +19,34 @@ const Search = () => {
     setSearchToogle((prevState) => !prevState);
   };
 
-  return (
-    <div className={className} onClick={handleClick}>
-      {!searchToogle ? (
-        <>
-          <div className={s.geoContainer}>
-            <GoLocation size={20} />
-          </div>
-          <span className={s.addresContainer}>Адрес доставки</span>
-        </>
-      ) : (
-        <>
-          <div className={s.inputWrap}>
+  if (searchToogle) {
+    return (
+      <>
+        <div className={className}>
+          <div className={s.searchWrap}>
             <div className={s.geoContainer}>
               <GoLocation size={20} />
             </div>
-            <div>
-              <input />
+            <div className={s.inputContainer}>
+              <input placeholder="Укажите адрес доставки" />
             </div>
             <div className={s.geoContainer}>
-              <GrClose size={20} />
+              <GrClose size={20} onClick={handleClick} />
             </div>
           </div>
-          <div className={s.listWrap}>blablabla</div>
-        </>
-      )}
+        </div>
+
+        <div className={s.listWrap}>blablabla</div>
+        <div className={s.backLayer} onClick={handleClick} />
+      </>
+    );
+  }
+  return (
+    <div className={className} onClick={handleClick}>
+      <div className={s.geoContainer}>
+        <GoLocation size={20} />
+      </div>
+      <span className={s.addresContainer}>Адрес доставки</span>
     </div>
   );
 };

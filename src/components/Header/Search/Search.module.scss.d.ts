@@ -2,11 +2,13 @@
 // Please do not change this file!
 interface CssExports {
   addresContainer: string;
+  backLayer: string;
   filtersContainer: string;
   geoContainer: string;
-  inputWrap: string;
+  inputContainer: string;
   listWrap: string;
   openInput: string;
+  searchWrap: string;
 }
 export const cssExports: CssExports;
 export default cssExports;
