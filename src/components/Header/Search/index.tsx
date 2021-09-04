@@ -5,6 +5,9 @@ import { GrSearch, GrClose } from 'react-icons/gr';
 
 import s from './Search.module.scss';
 
+// TODO: убрать фон бордер
+// TODO: сделать инпут слошным
+
 const Serach = () => {
   const [searchToogle, setSearchToogle] = React.useState(false);
 

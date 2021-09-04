@@ -47,7 +47,7 @@
   height: 72px;
   border-bottom: 1px solid #e3e4e6;
   background-color: white;
-  z-index: 1000;
+  z-index: 2000;
 
   display: grid;
   grid-template-columns: 100px minmax(120px, 1fr) 100px;
@@ -73,9 +73,9 @@
   border-left: 1px solid #e3e4e6;
   border-right: 1px solid #e3e4e6;
   border-bottom: 1px solid #e3e4e6;
-  z-index: 1000;
+  z-index: 2000;
   position: fixed;
-  top: 74px;
+  top: 72px;
   left: 168px;
   z-index: 3000;
   background-color: white;
@@ -97,7 +97,7 @@
   height: 100%;
 
   position: fixed;
-  top: 74px;
+  top: 72px;
   left: 0;
   z-index: 2000;
 
