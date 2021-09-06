@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import * as React from 'react';
@@ -5,11 +6,16 @@ import { GrSearch, GrClose } from 'react-icons/gr';
 
 import s from './Search.module.scss';
 
-// TODO: убрать фон бордер
+// import data, { SearchData } from '../../../utils/data';
+
+// TODO: стилизовать вывод названий найденных ресторанов
+// TODO: реализовать поиск по словам
 // TODO: сделать инпут слошным
+// TODO: добавить спинер при поиске вместо лупы
 
 const Serach = () => {
   const [searchToogle, setSearchToogle] = React.useState(false);
+  const [searchData, setSearchData] = React.useState<string[]>([]);
 
   const ref = React.useRef<HTMLInputElement>(null);
 
@@ -42,6 +48,14 @@ const Serach = () => {
               </div>
             </div>
           </div>
+          {searchData.length !== 0 && (
+            <div className={s.listWrap}>
+              {searchData.map(({ name }) => (
+                <p>{name}</p>
+              ))}
+            </div>
+          )}
+
           <div className={s.backLayer} onClick={handleClick} />
         </>
       )}

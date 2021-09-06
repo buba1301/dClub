@@ -5,11 +5,12 @@ import cn from 'classnames';
 import { GoLocation } from 'react-icons/go';
 import { GrClose } from 'react-icons/gr';
 
-import s from './Search.module.scss';
+import s from './GeoSearch.module.scss';
 
 // TODO: добавить дебаунс для поиска
 // TODO: добавить поиск на сервере
-// TODO: ДОбавить вывод списка найденых совпадений
+// TODO: Добавить вывод списка найденых совпадений
+// TODO: Реализовать фильтрацию по геопозиции
 
 const Search = () => {
   const [searchToogle, setSearchToogle] = React.useState(false);
