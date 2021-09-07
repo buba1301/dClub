@@ -1,24 +1,29 @@
-.buttonContainer {
+.basketContainer {
   display: grid;
   grid-template-columns: 24px auto;
   justify-content: center;
   align-content: center;
   grid-gap: 5px;
-  border-style: none;
-  border-right: 1px solid #e3e4e6;
-  background-color: white;
-  cursor: pointer;
-  z-index: 1000;
+  cursor: default;
 }
 
-.buttonContainer span {
+.basketContainer span {
   font-size: 15px;
   line-height: 20px;
   font-weight: 700;
 }
 
+.empty {
+  background-color: white;
+}
+
+.notEmpty {
+  background-color: green;
+  cursor: pointer;
+}
+
 @media (max-width: 640px) {
-  .buttonContainer span {
+  .busketContainer span {
     display: none;
   }
 }

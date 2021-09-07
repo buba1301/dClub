@@ -5,7 +5,7 @@ import RegFrom from '../RegForm';
 import s from './Login.module.scss';
 
 const Login = () => {
-  const [toogle, setToogle] = React.useState(true);
+  const [toogle, setToogle] = React.useState(false);
 
   const handleClick = (): void => {
     setToogle((prevValue) => !prevValue);

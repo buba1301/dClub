@@ -12,6 +12,9 @@ import useOnClickOutside from '../../../hooks/useOnClickOutSide';
 // TODO: добавить переход к пользовательскому соглашению
 // TODO: добавить переход с передаваемым данным
 // TODO: text in i18next
+// TODO: регистрация по номеру телефона
+// TODO: рег через вк, переход в вк
+// TODO: рег через сбер, переход на сбер
 
 type Company = 'sber' | 'vk';
 
@@ -39,13 +42,20 @@ type Props = {
 };
 
 const RegFrom = ({ onClick }: Props) => {
-  const ref = React.useRef(null);
+  const refContainer = React.useRef<HTMLDivElement>(null);
+  const refInput = React.useRef<HTMLInputElement>(null);
 
-  useOnClickOutside(ref, onClick);
+  useOnClickOutside(refContainer, onClick);
+
+  React.useEffect(() => {
+    if (refInput.current !== null) {
+      refInput.current.focus();
+    }
+  }, []);
 
   return (
     <div className={s.overlay}>
-      <div className={s.container} ref={ref}>
+      <div className={s.container} ref={refContainer}>
         <div className={s.closeButton} onClick={onClick}>
           <GrClose size={20} />
         </div>
@@ -56,7 +66,7 @@ const RegFrom = ({ onClick }: Props) => {
               <div className={s.formFieldWrap}>
                 <label htmlFor="phone">
                   <p>Телефон</p>
-                  <input id="phone" name="phone" type="text" />
+                  <input id="phone" name="phone" type="text" ref={refInput} />
                 </label>
               </div>
             </div>

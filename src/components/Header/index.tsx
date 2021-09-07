@@ -6,6 +6,7 @@ import Logo from './Logo';
 import GeoSearch from './GeoSearch';
 import Serach from './Search';
 import Login from './Login';
+import Basket from './Basket';
 
 const Header = () => (
   <div className={s.headerWrapper}>
@@ -17,7 +18,7 @@ const Header = () => (
         <GeoSearch />
         <Serach />
         <Login />
-        <div className={s.buscketContainer}>5</div>
+        <Basket />
       </div>
     </div>
   </div>
