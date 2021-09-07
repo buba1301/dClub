@@ -1,0 +1,15 @@
+.buttonContainer {
+  display: grid;
+  grid-template-columns: 24px auto;
+  justify-content: center;
+  align-content: center;
+  grid-gap: 5px;
+  border-style: none;
+  background-color: white;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.buttonContainer span {
+  font-weight: bold;
+}

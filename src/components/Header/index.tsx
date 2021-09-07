@@ -5,6 +5,7 @@ import s from './Header.module.scss';
 import Logo from './Logo';
 import GeoSearch from './GeoSearch';
 import Serach from './Search';
+import Login from './Login';
 
 const Header = () => (
   <div className={s.headerWrapper}>
@@ -15,7 +16,7 @@ const Header = () => (
         </div>
         <GeoSearch />
         <Serach />
-        <div className={s.buttonContainer}>4</div>
+        <Login />
         <div className={s.buscketContainer}>5</div>
       </div>
     </div>

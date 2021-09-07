@@ -1,0 +1,222 @@
+.overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 4000;
+  box-sizing: border-box;
+  overflow: scroll;
+
+  padding: 68px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 720px;
+  height: 400px;
+  max-height: unset;
+  margin: auto;
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  z-index: 4000;
+  transition: margin-bottom 0.2s ease-out;
+
+  display: grid;
+  grid-template-rows: 48px 1fr;
+  gap: 5px;
+}
+
+.closeButton {
+  justify-self: end;
+  margin-top: 16px;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.body {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.contant {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: calc(100% - 48px);
+  height: auto;
+  padding-left: 48px;
+}
+
+.loginTitle {
+  margin-top: 0;
+  margin-bottom: 2px;
+  font-size: 27px;
+  line-height: 41px;
+  font-weight: 700;
+}
+
+.loginForm {
+  margin: 16px 0;
+  width: 100%;
+  height: auto;
+}
+
+.formFieldWrap {
+  width: 100%;
+  margin-bottom: 8px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.formFieldWrap label {
+  width: 100%;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.formFieldWrap input {
+  width: 100%;
+  padding-bottom: 5px;
+  border-style: none;
+  outline: none;
+  border-bottom: 1px solid #919399;
+  font-size: 15px;
+  line-height: 17px;
+}
+
+.agreement {
+  margin: 0 16px 0 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: #919399;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.agreement a {
+  margin: 0 16px 0 0;
+  padding-left: 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: #0ec645;
+  text-decoration: underline;
+}
+
+.loginConnections {
+  width: 100%;
+  height: auto;
+  padding-left: 48px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background: #f6f6f6;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.loginConnectionsTitle {
+  width: 100%;
+  font-weight: 300;
+  margin: 16px 0;
+}
+
+.loginConnectionsLinks {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 48px;
+}
+
+.loginConnectionsLinks a {
+  display: block;
+  width: 307px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginConnectionsData {
+  width: 100%;
+  height: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #919399;
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  margin-bottom: 36px;
+}
+
+@media (max-width: 640px) {
+  .overlay {
+    padding: 0;
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .closeButton {
+    top: 12px;
+    right: 12px;
+  }
+
+  .body {
+    padding: 32px 16px;
+    justify-content: flex-start;
+  }
+
+  .contant {
+    width: 100%;
+    padding-left: 28px;
+    justify-content: flex-start;
+  }
+
+  .formFieldWrap {
+    padding-right: 28px;
+  }
+
+  .agreement {
+    margin: 0;
+  }
+
+  .loginConnections {
+    justify-items: flex-start;
+    background-color: #fff;
+    padding-left: 28px;
+  }
+
+  .loginConnectionsLinks {
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 5px;
+    padding-right: 28px;
+  }
+
+  .loginConnectionsLinks a {
+    width: 100%;
+  }
+}

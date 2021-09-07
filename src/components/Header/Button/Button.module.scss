@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  height: 44px;
+  padding: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #e3e4e6;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  font-weight: 400;
+  text-decoration: none;
+  color: #2e2e33;
+  cursor: pointer;
+
+  transition: all 0.3s;
+}
+
+.sber {
+  background-color: #fff;
+}
+
+.sber:hover {
+  background-color: #fafafa;
+}
+
+.vk {
+  background-color: rgb(73, 134, 204);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: 100%;
+  }
+}

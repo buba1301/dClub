@@ -48,14 +48,6 @@ const Serach = () => {
               </div>
             </div>
           </div>
-          {searchData.length !== 0 && (
-            <div className={s.listWrap}>
-              {searchData.map(({ name }) => (
-                <p>{name}</p>
-              ))}
-            </div>
-          )}
-
           <div className={s.backLayer} onClick={handleClick} />
         </>
       )}
@@ -64,3 +56,9 @@ const Serach = () => {
 };
 
 export default Serach;
+
+/* {searchData.length !== 0 && (
+            <div className={s.listWrap}>
+              {console.log('!!!!')}
+            </div>
+          )} */
