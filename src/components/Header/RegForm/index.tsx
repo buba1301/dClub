@@ -9,6 +9,10 @@ import Button from '../Button';
 import s from './RegForm.module.scss';
 import useOnClickOutside from '../../../hooks/useOnClickOutSide';
 
+// TODO: добавить переход к пользовательскому соглашению
+// TODO: добавить переход с передаваемым данным
+// TODO: text in i18next
+
 type Company = 'sber' | 'vk';
 
 export interface ButtonData {

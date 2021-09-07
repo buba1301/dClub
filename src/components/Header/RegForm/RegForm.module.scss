@@ -167,6 +167,18 @@
   justify-content: center;
   margin-top: 12px;
   margin-bottom: 36px;
+  padding-right: 48px;
+}
+
+.loginConnectionsData::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  margin-top: 5px;
+  margin-left: 5px;
+  border-top: 2px solid #919399;
+  border-right: 2px solid #919399;
 }
 
 @media (max-width: 640px) {
@@ -218,5 +230,9 @@
 
   .loginConnectionsLinks a {
     width: 100%;
+  }
+
+  .loginConnectionsData {
+    padding: 0;
   }
 }
