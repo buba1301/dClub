@@ -2,7 +2,6 @@
 // Please do not change this file!
 interface CssExports {
   basketContainer: string;
-  busketContainer: string;
   empty: string;
   notEmpty: string;
 }

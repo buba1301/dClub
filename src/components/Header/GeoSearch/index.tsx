@@ -25,17 +25,24 @@ const Search = () => {
 
   const className = cn({
     [s.filtersContainer]: true,
-    [s.openInput]: searchToogle,
+    // [s.openInput]: searchToogle,
   });
 
   const handleClick = () => {
     setSearchToogle((prevState) => !prevState);
   };
 
-  if (searchToogle) {
-    return (
-      <>
-        <div className={className}>
+  return (
+    <>
+      <div className={className} onClick={handleClick}>
+        <div className={s.geoContainer}>
+          <GoLocation size={20} />
+        </div>
+        <span className={s.addresContainer}>Адрес доставки</span>
+      </div>
+
+      {searchToogle && (
+        <>
           <div className={s.searchWrap}>
             <div className={s.geoContainer}>
               <GoLocation size={20} />
@@ -47,24 +54,31 @@ const Search = () => {
               <GrClose size={20} onClick={handleClick} />
             </div>
           </div>
-        </div>
 
-        <div className={s.listWrap}>
-          <p>blablabla</p>
-          <p>blablabla</p>
-        </div>
-        <div className={s.backLayer} onClick={handleClick} />
-      </>
-    );
-  }
-  return (
-    <div className={className} onClick={handleClick}>
-      <div className={s.geoContainer}>
-        <GoLocation size={20} />
-      </div>
-      <span className={s.addresContainer}>Адрес доставки</span>
-    </div>
+          <div className={s.listWrap}>
+            <p>blablabla</p>
+            <p>blablabla</p>
+          </div>
+          <div className={s.backLayer} onClick={handleClick} />
+        </>
+      )}
+    </>
   );
 };
 
 export default Search;
+
+/*
+.searchWrap {
+  position: fixed;
+  width: calc(100% - 525px);
+  height: 72px;
+  border-bottom: 1px solid #e3e4e6;
+  background-color: white;
+  z-index: 2000;
+
+  display: grid;
+  grid-template-columns: 100px minmax(120px, 1fr) 100px;
+  justify-content: space-around;
+  align-content: center;
+} */

@@ -6,9 +6,6 @@ import { GrSearch, GrClose } from 'react-icons/gr';
 
 import s from './Search.module.scss';
 
-// import data, { SearchData } from '../../../utils/data';
-
-// TODO: стилизовать вывод названий найденных ресторанов
 // TODO: реализовать поиск по словам
 // TODO: сделать инпут слошным
 // TODO: добавить спинер при поиске вместо лупы
@@ -62,3 +59,9 @@ export default Serach;
               {console.log('!!!!')}
             </div>
           )} */
+
+/*
+position: fixed;
+  top: 0px;
+  left: 0px;
+*/

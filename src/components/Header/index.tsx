@@ -15,8 +15,10 @@ const Header = () => (
         <div className={s.logoWrap}>
           <Logo />
         </div>
-        <GeoSearch />
-        <Serach />
+        <div className={s.searchsConteiner}>
+          <GeoSearch />
+          <Serach />
+        </div>
         <Login />
         <Basket />
       </div>

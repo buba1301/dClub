@@ -18,16 +18,19 @@
 }
 
 .inputContainer {
-  width: calc(100% - 525px);
+  width: 100%;
   height: 72px;
+  border-right: 1px solid #e3e4e6;
   border-bottom: 1px solid #e3e4e6;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  margin-left: 168px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   z-index: 2000;
 }
 
@@ -124,7 +127,7 @@
 
 @media (max-width: 1024px) {
   .inputContainer {
-    width: calc(100% - 525px);
+    width: 100%;
   }
 
   .listWrap {
@@ -133,12 +136,18 @@
 }
 
 @media (max-width: 786px) {
+  .searchContainer {
+    padding: 0 32px;
+    border-right: 1px solid #e3e4e6;
+  }
+
   .inputContainer {
-    width: 392px;
+    width: 100%;
   }
 
   .inputWrap {
-    width: 392px;
+    width: 100%;
+    margin: 0 6px;
   }
 
   .listWrap {
@@ -148,21 +157,23 @@
 
 @media (max-width: 640px) {
   .searchContainer {
-    width: 50px;
+    padding: 0 6px;
     grid-template-columns: auto;
   }
+
   .searchContainer span {
     display: none;
   }
 
   .inputContainer {
+    position: fixed;
+    left: 0;
     width: 100%;
     margin: 0;
   }
 
   .inputWrap {
     width: 100%;
-    margin: 0;
   }
 
   .listWrap {

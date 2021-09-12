@@ -14,16 +14,20 @@
 }
 
 .empty {
-  background-color: white;
+  background-color: #fff;
 }
 
 .notEmpty {
-  background-color: green;
+  background-color: #0ec645;
   cursor: pointer;
 }
 
 @media (max-width: 640px) {
-  .busketContainer span {
+  .basketContainer {
+    grid-template-columns: auto;
+  }
+
+  .basketContainer span {
     display: none;
   }
 }
