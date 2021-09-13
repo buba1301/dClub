@@ -11,6 +11,7 @@ import s from './GeoSearch.module.scss';
 // TODO: добавить поиск на сервере
 // TODO: Добавить вывод списка найденых совпадений
 // TODO: Реализовать фильтрацию по геопозиции
+// TODO: добавить вывод формы для адресов для телефонов
 
 const Search = () => {
   const [searchToogle, setSearchToogle] = React.useState(false);
