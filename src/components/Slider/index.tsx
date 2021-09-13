@@ -21,6 +21,7 @@ const shiftValues: ShiftValues = {
 
 const Slider = () => {
   const itemPerPage = 4;
+
   const [list] = React.useState(data);
   const [page, setPage] = React.useState(1);
   const [firstIndexNextPage, setFirstIndex] = React.useState(4);
@@ -30,17 +31,32 @@ const Slider = () => {
   const firstPage = 1;
   const lastPage = Math.ceil(list.length / 4);
 
+  const getShiftValue = (key: string): number => shiftValues[key];
+
   const handleClickRight = () => {
     setPage((prevState) => prevState + 1);
 
     const nextPageList = list.slice(firstIndexNextPage, lastIndexNextPage);
 
-    const shiftValue = shiftValues[nextPageList.length.toString()];
+    const shiftValue = getShiftValue(nextPageList.length.toString());
 
     setFirstIndex((prevState) => prevState + itemPerPage);
     setLastIndex((prevState) => prevState + itemPerPage + 1);
 
     setShiftPage((prevState) => prevState + shiftValue);
+  };
+
+  const handleClickLeft = () => {
+    setPage((prevState) => prevState - 1);
+
+    const prewPageList = list.slice(firstIndexNextPage - itemPerPage, lastIndexNextPage - itemPerPage - 1);
+
+    const shiftValue = getShiftValue(prewPageList.length.toString());
+
+    setFirstIndex((prevState) => prevState - itemPerPage);
+    setLastIndex((prevState) => prevState - itemPerPage - 1);
+
+    setShiftPage((prevState) => prevState - shiftValue);
   };
 
   const style = {
@@ -63,7 +79,7 @@ const Slider = () => {
         </button>
       )}
       {page !== firstPage && (
-        <button className={classNamesLeft} type="button">
+        <button className={classNamesLeft} type="button" onClick={handleClickLeft}>
           <FiChevronLeft />
         </button>
       )}
