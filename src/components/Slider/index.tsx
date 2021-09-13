@@ -6,6 +6,7 @@ import SliderCard from './SliderCard';
 import s from './Slider.module.scss';
 
 // TODO: убрать скрол бар в хроме
+// TODO: добавить переходы по карточкам
 
 type ShiftValues = {
   [key: string]: number;

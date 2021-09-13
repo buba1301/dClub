@@ -1,7 +1,7 @@
 .wrap {
-  width: 148px;
+  width: 168px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   cursor: pointer;
 }
@@ -16,4 +16,15 @@
   font-size: 20px;
   font-weight: 300;
   line-height: normal;
+}
+
+@media (max-width: 1024px) {
+  .wrap {
+    width: 40px;
+    height: 40px;
+    margin: 16px;
+  }
+  .textWrap {
+    display: none;
+  }
 }

@@ -12,9 +12,8 @@ const Header = () => (
   <div className={s.headerWrapper}>
     <div className={s.header}>
       <div className={s.headerContainer}>
-        <div className={s.logoWrap}>
-          <Logo />
-        </div>
+        <Logo />
+
         <div className={s.searchsConteiner}>
           <GeoSearch />
           <Serach />
