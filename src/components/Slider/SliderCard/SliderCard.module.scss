@@ -12,3 +12,10 @@
   box-shadow: 0 7px 19px -1px rgba(172, 172, 179, 0.5);
   transform: translateY(-6px);
 }
+
+@media (max-width: 640px) {
+  .container {
+    width: 165px;
+    height: 100px;
+  }
+}

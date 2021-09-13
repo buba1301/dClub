@@ -14,7 +14,7 @@
   position: absolute;
   left: 0px;
   display: grid;
-  grid-auto-columns: 262px;
+  grid-auto-columns: minmax(auto, 262px);
   grid-auto-flow: column;
   column-gap: 20px;
   padding: 18px 0;
@@ -24,7 +24,7 @@
 .buttonWrap {
   display: none;
   position: fixed;
-  top: 25%;
+  top: 35%;
   margin-top: -28px;
   z-index: 2000;
   width: 56px;
