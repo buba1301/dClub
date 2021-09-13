@@ -21,6 +21,12 @@
 @media (max-width: 640px) {
   .buttonContainer {
     grid-template-columns: auto;
+    grid-column: 2 / 3;
+    padding: 8px 16px;
+    border: none;
+    height: 50px;
+    border-radius: 12px;
+    background-color: #f6f6f6;
   }
 
   .buttonContainer span {

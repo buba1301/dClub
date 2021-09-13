@@ -24,10 +24,6 @@
 
 @media (max-width: 640px) {
   .basketContainer {
-    grid-template-columns: auto;
-  }
-
-  .basketContainer span {
     display: none;
   }
 }

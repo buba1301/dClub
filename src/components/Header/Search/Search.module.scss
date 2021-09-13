@@ -139,6 +139,7 @@
   .searchContainer {
     padding: 0 32px;
     border-right: 1px solid #e3e4e6;
+    width: 100%;
   }
 
   .inputContainer {
@@ -157,8 +158,13 @@
 
 @media (max-width: 640px) {
   .searchContainer {
-    padding: 0 6px;
     grid-template-columns: auto;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background-color: #f6f6f6;
+    padding: 0;
   }
 
   .searchContainer span {

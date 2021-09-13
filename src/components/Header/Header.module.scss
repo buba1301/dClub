@@ -28,3 +28,21 @@
   display: grid;
   grid-template-columns: 1fr minmax(auto, 178px);
 }
+
+@media (max-width: 640px) {
+  .headerContainer {
+    grid-template-columns: 1fr 50px;
+    column-gap: 10px;
+    border: none;
+    padding: 8px 16px;
+    align-items: center;
+  }
+
+  .searchsConteiner {
+    grid-column: 1 / 2;
+    grid-template-columns: 1fr 50px;
+    column-gap: 10px;
+    justify-content: center;
+    align-content: center;
+  }
+}
