@@ -44,3 +44,15 @@
 .left {
   left: 44px;
 }
+
+@media (max-width: 1024px) {
+  .container {
+    overflow: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  .buttonWrap {
+    display: none;
+  }
+}

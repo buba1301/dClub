@@ -9,3 +9,9 @@
   display: grid;
   grid-template-rows: repeat(2, auto);
 }
+
+@media (max-width: 640px) {
+  .wrap {
+    padding: 0 16px;
+  }
+}

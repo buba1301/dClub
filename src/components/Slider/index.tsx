@@ -9,8 +9,6 @@ type ShiftValues = {
   [key: string]: number;
 };
 
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-
 const shiftValues: ShiftValues = {
   '1': 146,
   '2': 438,
@@ -18,6 +16,10 @@ const shiftValues: ShiftValues = {
   '4': 950,
   '5': 1128,
 };
+
+const getShiftValue = (key: string): number => shiftValues[key];
+
+const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 const Slider = () => {
   const itemPerPage = 4;
@@ -30,8 +32,6 @@ const Slider = () => {
 
   const firstPage = 1;
   const lastPage = Math.ceil(list.length / 4);
-
-  const getShiftValue = (key: string): number => shiftValues[key];
 
   const handleClickRight = () => {
     setPage((prevState) => prevState + 1);
