@@ -4,6 +4,7 @@ interface CssExports {
   buttonWrap: string;
   container: string;
   left: string;
+  mainContainer: string;
   right: string;
   wrap: string;
 }

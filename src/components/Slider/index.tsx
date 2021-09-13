@@ -70,22 +70,24 @@ const Slider = () => {
   const classNamesLeft = cn(s.buttonWrap, s.left);
 
   return (
-    <div className={s.wrap}>
-      <div className={s.container} style={style}>
-        {data.map((item) => (
-          <SliderCard key={item}>{item}</SliderCard>
-        ))}
+    <div className={s.mainContainer}>
+      <div className={s.wrap}>
+        <div className={s.container} style={style}>
+          {data.map((item) => (
+            <SliderCard key={item}>{item}</SliderCard>
+          ))}
+        </div>
+        {page !== lastPage && (
+          <button className={classNamesRight} type="button" onClick={handleClickRight}>
+            <FiChevronRight />
+          </button>
+        )}
+        {page !== firstPage && (
+          <button className={classNamesLeft} type="button" onClick={handleClickLeft}>
+            <FiChevronLeft />
+          </button>
+        )}
       </div>
-      {page !== lastPage && (
-        <button className={classNamesRight} type="button" onClick={handleClickRight}>
-          <FiChevronRight />
-        </button>
-      )}
-      {page !== firstPage && (
-        <button className={classNamesLeft} type="button" onClick={handleClickLeft}>
-          <FiChevronLeft />
-        </button>
-      )}
     </div>
   );
 };
