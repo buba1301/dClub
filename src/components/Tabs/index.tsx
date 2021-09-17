@@ -3,6 +3,8 @@ import cn from 'classnames';
 
 import s from './Tabs.module.scss';
 
+// TODO: прикрутить роутер
+
 type SiteChaptersName = {
   id: string;
   name: string;

@@ -4,11 +4,6 @@ interface CssExports {
   container: string;
   filtersContainer: string;
   moreButtonContainer: string;
-  promo: string;
-  restorant: string;
-  shops: string;
-  tab: string;
-  tabsContainer: string;
   vendorListContainer: string;
 }
 export const cssExports: CssExports;
