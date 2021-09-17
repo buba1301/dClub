@@ -34,6 +34,12 @@
   font-family: 'Montserrat-Bold', sans-serif;
 }
 
+@media (max-width: 768px) {
+  .tabsContainer {
+    gap: 28px;
+  }
+}
+
 @media (max-width: 640px) {
   .tabsContainer {
     height: fit-content;

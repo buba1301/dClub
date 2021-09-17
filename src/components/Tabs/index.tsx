@@ -31,7 +31,11 @@ const siteChaptersName: SiteChaptersName[] = [
   },
 ];
 
-const Tabs = () => {
+type Props = {
+  setCurrentTab: Function;
+};
+
+const Tabs = ({ setCurrentTab }: Props) => {
   const [chapters, setChapters] = React.useState<SiteChaptersName[]>(siteChaptersName);
 
   const handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
@@ -43,6 +47,8 @@ const Tabs = () => {
         active: item.id === id,
       })),
     );
+
+    setCurrentTab && setCurrentTab(id);
   };
 
   return (

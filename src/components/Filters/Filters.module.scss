@@ -24,3 +24,10 @@
 .itemContainer:hover {
   background-color: #ecedf0;
 }
+
+@media (max-width: 1024px) {
+  .filtersContainer {
+    overflow: scroll;
+    scroll-behavior: smooth;
+  }
+}
