@@ -18,6 +18,7 @@
   z-index: 110;
   height: 72px;
   border-bottom: 1px solid #e3e4e6;
+  background-color: white;
 
   display: grid;
   grid-template-columns: minmax(40px, auto) minmax(auto, 1fr) repeat(2, minmax(auto, 178px));

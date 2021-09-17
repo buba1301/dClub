@@ -1,13 +1,14 @@
 import * as React from 'react';
-import Slider from '../../components/Slider';
 
 import s from './Vendor.module.scss';
+import Tabs from '../../components/Tabs';
 
 const Vendor = () => (
   <main className={s.container}>
-    <div className={s.wrap}>
-      <Slider />
-    </div>
+    <Tabs />
+    <div className={s.filtersContainer}>2</div>
+    <div className={s.vendorListContainer}>3</div>
+    <div className={s.moreButtonContainer}>4</div>
   </main>
 );
 

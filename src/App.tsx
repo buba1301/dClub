@@ -4,7 +4,7 @@ import s from './App.module.scss';
 
 import Header from './components/Header';
 import Slider from './components/Slider';
-// import Vendor from './pages/Vendor';
+import Vendor from './pages/Vendor';
 
 const App = () => (
   <>
@@ -12,6 +12,7 @@ const App = () => (
       <Header />
     </div>
     <Slider />
+    <Vendor />
   </>
 );
 

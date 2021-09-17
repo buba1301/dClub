@@ -31,7 +31,7 @@
 .buttonWrap {
   display: none;
   position: fixed;
-  top: 33%;
+  top: 143px;
   margin-top: -28px;
   z-index: 2000;
   width: 56px;
@@ -70,5 +70,11 @@
 
   .buttonWrap {
     display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    height: 132px;
   }
 }

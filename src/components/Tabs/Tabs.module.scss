@@ -1,0 +1,38 @@
+.tabsContainer {
+  width: 100%;
+  height: 100px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px;
+}
+
+.tab {
+  cursor: pointer;
+  font-family: 'Montserrat-Bold', sans-serif;
+  font-size: 46px;
+  line-height: 64px;
+  letter-spacing: 1px;
+  font-weight: 800;
+  transition: color 0.2s;
+}
+
+.tabButton {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  font-family: inherit;
+  color: #919399;
+}
+
+.activeTab {
+  color: #2e2e33;
+}
+
+.tabButton h1 {
+  font-size: 46px;
+  line-height: 64px;
+}
