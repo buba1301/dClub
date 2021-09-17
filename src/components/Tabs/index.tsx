@@ -4,6 +4,8 @@ import cn from 'classnames';
 import s from './Tabs.module.scss';
 
 // TODO: прикрутить роутер
+// TODO: добавить на мобилке в первом елементе две ссылки магазины и аптеки
+// TODO: добавить слайдет средний элемент на мобилке
 
 type SiteChaptersName = {
   id: string;
