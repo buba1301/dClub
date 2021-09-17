@@ -1,24 +1,41 @@
 import * as React from 'react';
 import useOnClickOutside from '../../../hooks/useOnClickOutSide';
-import { TypesList } from '../../../utils/filters';
+import { FiltersItems } from '../../../utils/filters';
 
 import s from './DropMenu.module.scss';
 
 type Props = {
   setOpenDrop: Function;
-  dropMenuTypesList: TypesList[];
+  dropMenu: FiltersItems;
 };
 
-const DropMenu = ({ setOpenDrop, dropMenuTypesList }: Props) => {
+const DropMenu = ({ setOpenDrop, dropMenu }: Props) => {
   const ref = React.useRef<HTMLDivElement>(null);
+
+  const { type, types } = dropMenu;
 
   useOnClickOutside(ref, setOpenDrop);
 
+  const style = {
+    left: type === 'kitchen' ? '300px' : '0',
+  };
+
   return (
-    <div className={s.container} ref={ref}>
-      {dropMenuTypesList.map((item) => (
-        <div key={item.type}>{item.name}</div>
-      ))}
+    <div className={s.container} style={style} ref={ref}>
+      <form className={s.formWrap}>
+        <div className={s.content}>
+          {types &&
+            types.map((item) => (
+              <div key={item.type} className={s.itemWrap}>
+                <input type="checkbox" id={item.type} />
+                <label htmlFor={item.type}>{item.name}</label>
+              </div>
+            ))}
+        </div>
+        <div className={s.buttonContainer}>
+          <button type="submit">Применить</button>
+        </div>
+      </form>
     </div>
   );
 };
