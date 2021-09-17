@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const useOnClickOutside = (ref: React.RefObject<HTMLDivElement> | null, handler: () => void) => {
+const useOnClickOutside = (ref: React.RefObject<HTMLDivElement> | null, handler: Function) => {
   React.useEffect(
     () => {
       const listener = (event: MouseEvent) => {

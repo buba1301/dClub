@@ -1,20 +1,15 @@
-type kitchenTypes = {
+export type TypesList = {
   name: string;
   type: string;
 };
 
-export type RestorantFilters = {
+export type FiltersItems = {
   type: string;
   name: string;
-  types?: kitchenTypes[];
+  types?: TypesList[];
 };
 
-export type ShopsFilters = {
-  name: string;
-  type: string;
-};
-
-export const restorantFilters: RestorantFilters[] = [
+export const restorantFilters: FiltersItems[] = [
   {
     type: 'sort',
     name: '||',
@@ -109,7 +104,7 @@ export const restorantFilters: RestorantFilters[] = [
   },
 ];
 
-export const shopsFilters: ShopsFilters[] = [
+export const shopsFilters: FiltersItems[] = [
   {
     name: 'Продукты',
     type: 'food',

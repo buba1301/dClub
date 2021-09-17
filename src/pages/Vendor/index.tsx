@@ -3,10 +3,10 @@ import * as React from 'react';
 import s from './Vendor.module.scss';
 import Tabs from '../../components/Tabs';
 import Filters from '../../components/Filters';
-import { restorantFilters, RestorantFilters, shopsFilters, ShopsFilters } from '../../utils/filters';
+import { restorantFilters, FiltersItems, shopsFilters } from '../../utils/filters';
 
 type FiltersList = {
-  [key: string]: RestorantFilters[] | ShopsFilters[];
+  [key: string]: FiltersItems[];
 };
 
 const filtersList: FiltersList = {
@@ -16,7 +16,8 @@ const filtersList: FiltersList = {
 
 const Vendor = () => {
   const [currentTab, setCurrentTab] = React.useState<string>('restorant');
-  const [filters, setFilters] = React.useState<RestorantFilters[] | ShopsFilters[]>([]);
+  const [filters, setFilters] = React.useState<FiltersItems[]>([]);
+  // const [filterTypes, setFilterTypes] = React.useState([]);
 
   React.useEffect(() => {
     setFilters(filtersList[currentTab]);
