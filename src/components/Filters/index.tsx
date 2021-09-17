@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { FiltersItems } from '../../utils/filters';
 import DropMenu from './DropMenu';
+import FilterButton from './FilterButton';
 
 import s from './Filters.module.scss';
 
@@ -29,10 +30,8 @@ const Filters = ({ filters }: Props) => {
 
   return (
     <div className={s.filtersContainer}>
-      {filters.map((filter) => (
-        <div key={filter.type} className={s.itemContainer} id={filter.type} onClick={handleClick}>
-          {filter.name}
-        </div>
+      {filters.map((item) => (
+        <FilterButton key={item.type} name={item.name} type={item.type} onClick={handleClick} />
       ))}
       {openDrop && <DropMenu setOpenDrop={setOpenDrop} dropMenu={dropMenu} />}
     </div>

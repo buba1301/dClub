@@ -14,7 +14,11 @@ const DropMenu = ({ setOpenDrop, dropMenu }: Props) => {
 
   const { type, types } = dropMenu;
 
-  useOnClickOutside(ref, setOpenDrop);
+  const handlClick = () => {
+    setOpenDrop && setOpenDrop(false);
+  };
+
+  useOnClickOutside(ref, handlClick);
 
   const style = {
     left: type === 'kitchen' ? '300px' : '0',
