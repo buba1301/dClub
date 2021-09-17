@@ -1,16 +1,26 @@
 .filtersContainer {
   width: 100%;
   height: 100px;
-  background-color: bisque;
 
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: aqua;
+  gap: 18px;
 }
 
 .itemContainer {
+  height: 44px;
+
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  border-radius: 12px;
+
+  background-color: #f6f6f6;
+  cursor: pointer;
+  padding: 0 16px;
+}
+
+.itemContainer:hover {
+  background-color: #ecedf0;
 }

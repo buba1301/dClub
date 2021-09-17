@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import s from './Filters.module.scss';
 
-const filters: string[] = ['||', 'любимые', 'навынос', 'акции', 'кухни', 'бронирование'];
+const filters: string[] = ['||', 'Любимые', 'Навынос', 'Акции', 'Кухни', 'Бронирование'];
 
 const Filters = () => (
   <div className={s.filtersContainer}>
