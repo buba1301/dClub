@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import * as React from 'react';
+import { find } from 'lodash';
 import cn from 'classnames';
 import useOnClickOutside from '../../../hooks/useOnClickOutSide';
-import { TypesList } from '../../../utils/filters';
+import { ActiveFilters, TypesList } from '../../../utils/filters';
 // import FiltersContext from '../../../Context';
 
 import s from './DropMenu.module.scss';
@@ -17,6 +18,7 @@ type Props = {
 const DropMenuButton = ({ name, type, types }: Props) => {
   const [openDrop, setOpenDrop] = React.useState(false);
   const [active] = React.useState(false);
+  const [checkedFiltersList, setChecked] = React.useState<ActiveFilters[]>([]);
 
   // const dispatch = React.useContext(FiltersContext);
 
@@ -32,6 +34,18 @@ const DropMenuButton = ({ name, type, types }: Props) => {
     if (type !== id) {
       setOpenDrop(false);
     }
+  };
+
+  const handleCheck = (event: React.SyntheticEvent<HTMLInputElement>) => {
+    // console.log(event.target.id);
+
+    const { id } = event.target as Element;
+
+    setChecked((prevState) =>
+      find(prevState, { type: id })
+        ? prevState.filter((item) => item.type !== id)
+        : [...prevState, { type: id }],
+    );
   };
 
   useOnClickOutside(ref, handleClickOutside);
@@ -55,14 +69,28 @@ const DropMenuButton = ({ name, type, types }: Props) => {
             <div className={s.content}>
               {types &&
                 types.map((item) => (
-                  <div key={item.type} className={s.itemWrap}>
-                    <input type="checkbox" id={item.type} />
-                    <label htmlFor={item.type}>{item.name}</label>
-                  </div>
+                  <label
+                    htmlFor={item.type}
+                    key={item.type}
+                    className={s.itemWrap}>
+                    <input
+                      type="checkbox"
+                      id={item.type}
+                      onClick={handleCheck}
+                    />
+                    <span>{item.name}</span>
+                  </label>
                 ))}
             </div>
             <div className={s.buttonContainer}>
-              <button type="submit">Применить</button>
+              {checkedFiltersList.length !== 0 ? (
+                <>
+                  <button type="button">Сбросить</button>
+                  <button type="submit">Применить</button>
+                </>
+              ) : (
+                <button type="submit">Применить</button>
+              )}
             </div>
           </form>
         </div>
