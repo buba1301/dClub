@@ -1,5 +1,8 @@
 import * as React from 'react';
+import { Actions } from '../pages/Vendor';
 
-const FiltersContext = React.createContext<Function>(() => {});
+// import { ActiveFilters } from '../utils/filters';
+
+const FiltersContext = React.createContext<React.Dispatch<Actions>>(() => null);
 
 export default FiltersContext;

@@ -10,7 +10,7 @@ type FiltersList = {
   [key: string]: FiltersItems[];
 };
 
-type Actions = {
+export type Actions = {
   type: string;
   value: string;
 };
@@ -35,7 +35,7 @@ const Vendor = () => {
   const [currentTab, setCurrentTab] = React.useState<string>('restorant');
   const [filtersList, setFiltersList] = React.useState<FiltersItems[]>([]);
   // const [vendorsData, setVendorsData] = React.useState([]);
-  const [dispatch] = React.useReducer(reducerActiveFilters, []);
+  const [, dispatch] = React.useReducer(reducerActiveFilters, []);
 
   React.useEffect(() => {
     setFiltersList(filtersListOnPage[currentTab]);

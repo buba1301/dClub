@@ -4,6 +4,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import useOnClickOutside from '../../../hooks/useOnClickOutSide';
 import { TypesList } from '../../../utils/filters';
+// import FiltersContext from '../../../Context';
 
 import s from './DropMenu.module.scss';
 
@@ -16,6 +17,8 @@ type Props = {
 const DropMenuButton = ({ name, type, types }: Props) => {
   const [openDrop, setOpenDrop] = React.useState(false);
   const [active] = React.useState(false);
+
+  // const dispatch = React.useContext(FiltersContext);
 
   const ref = React.useRef<HTMLDivElement>(null);
 
