@@ -8,10 +8,10 @@ import FilterButton from './FilterButton';
 import s from './Filters.module.scss';
 
 type Props = {
-  filters: FiltersItems[];
+  filtersList: FiltersItems[];
 };
 
-const Filters = ({ filters }: Props) => {
+const Filters = ({ filtersList }: Props) => {
   const [openDrop, setOpenDrop] = React.useState(false);
   const [dropMenu, setMenuDrop] = React.useState<FiltersItems>({ name: '', type: '' });
 
@@ -21,7 +21,7 @@ const Filters = ({ filters }: Props) => {
     if (id === 'sort' || id === 'kitchen') {
       setOpenDrop((prevState) => !prevState);
 
-      const menuTypesList = filters.find(({ type }) => type === id);
+      const menuTypesList = filtersList.find(({ type }) => type === id);
 
       menuTypesList && setMenuDrop(menuTypesList);
       // return;
@@ -30,7 +30,7 @@ const Filters = ({ filters }: Props) => {
 
   return (
     <div className={s.filtersContainer}>
-      {filters.map((item) => (
+      {filtersList.map((item) => (
         <FilterButton key={item.type} name={item.name} type={item.type} onClick={handleClick} />
       ))}
       {openDrop && <DropMenu setOpenDrop={setOpenDrop} dropMenu={dropMenu} />}

@@ -16,7 +16,10 @@ const FilterButton = ({ name, type, onClick }: Props) => {
 
   const handleClick = (event: React.SyntheticEvent<HTMLDivElement>) => {
     onClick && onClick(event);
-    setActive((prevState) => !prevState);
+
+    if (type !== 'sort' && type !== 'kitchen') {
+      setActive((prevState) => !prevState);
+    }
   };
 
   const classNames = cn(s.itemContainer, {

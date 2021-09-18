@@ -9,24 +9,25 @@ type FiltersList = {
   [key: string]: FiltersItems[];
 };
 
-const filtersList: FiltersList = {
+const filtersListOnPage: FiltersList = {
   restorant: restorantFilters,
   shops: shopsFilters,
 };
 
 const Vendor = () => {
   const [currentTab, setCurrentTab] = React.useState<string>('restorant');
-  const [filters, setFilters] = React.useState<FiltersItems[]>([]);
-  // const [filterTypes, setFilterTypes] = React.useState([]);
+  const [filtersList, setFiltersList] = React.useState<FiltersItems[]>([]);
+  // const [vendorsData, setVendorsData] = React.useState([]);
+  // const [activeFilters, setActiveFilters] = React.useState([]);
 
   React.useEffect(() => {
-    setFilters(filtersList[currentTab]);
+    setFiltersList(filtersListOnPage[currentTab]);
   }, [currentTab]);
 
   return (
     <main className={s.container}>
       <Tabs setCurrentTab={setCurrentTab} />
-      {filters && <Filters filters={filters} />}
+      {filtersList && <Filters filtersList={filtersList} />}
       <div className={s.vendorListContainer}>3</div>
       <div className={s.moreButtonContainer}>4</div>
     </main>
