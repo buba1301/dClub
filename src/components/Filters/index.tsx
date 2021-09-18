@@ -19,7 +19,7 @@ const Filters = ({ filters }: Props) => {
     const { id } = event.currentTarget;
 
     if (id === 'sort' || id === 'kitchen') {
-      setOpenDrop(true);
+      setOpenDrop((prevState) => !prevState);
 
       const menuTypesList = filters.find(({ type }) => type === id);
 

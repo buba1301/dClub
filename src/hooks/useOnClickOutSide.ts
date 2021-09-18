@@ -8,7 +8,7 @@ const useOnClickOutside = (ref: React.RefObject<HTMLDivElement> | null, handler:
         if (!ref?.current || ref.current.contains(event.target as HTMLDivElement)) {
           return;
         }
-        handler();
+        handler(event);
       };
 
       document.addEventListener('mousedown', listener);

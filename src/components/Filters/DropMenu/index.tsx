@@ -14,8 +14,12 @@ const DropMenu = ({ setOpenDrop, dropMenu }: Props) => {
 
   const { type, types } = dropMenu;
 
-  const handlClick = () => {
-    setOpenDrop && setOpenDrop(false);
+  const handlClick = (event: MouseEvent) => {
+    const { id } = event.target as Element;
+
+    if (id !== 'sort' && id !== 'kitchen') {
+      setOpenDrop && setOpenDrop(false);
+    }
   };
 
   useOnClickOutside(ref, handlClick);
