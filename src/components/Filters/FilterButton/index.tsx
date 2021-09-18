@@ -4,6 +4,7 @@ import * as React from 'react';
 import cn from 'classnames';
 
 import s from './FilterButton.module.scss';
+import FiltersContext from '../../../Context';
 
 type Props = {
   name: string;
@@ -13,7 +14,10 @@ type Props = {
 const FilterButton = ({ name, type }: Props) => {
   const [active, setActive] = React.useState(false);
 
+  const dispatch = React.useContext(FiltersContext);
+
   const handleClick = (event: React.SyntheticEvent<HTMLDivElement>) => {
+    active === true ? dispatch({ type: 'removeFilter', value: type }) : dispatch({ type: 'addFilter', value: type });
     setActive((prevState) => !prevState);
   };
 

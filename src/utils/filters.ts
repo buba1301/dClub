@@ -1,3 +1,7 @@
+export type ActiveFilters = {
+  type: string;
+};
+
 export type TypesList = {
   name: string;
   type: string;
