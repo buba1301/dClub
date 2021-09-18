@@ -8,18 +8,13 @@ import s from './FilterButton.module.scss';
 type Props = {
   name: string;
   type: string;
-  onClick: Function;
 };
 
-const FilterButton = ({ name, type, onClick }: Props) => {
+const FilterButton = ({ name, type }: Props) => {
   const [active, setActive] = React.useState(false);
 
   const handleClick = (event: React.SyntheticEvent<HTMLDivElement>) => {
-    onClick && onClick(event);
-
-    if (type !== 'sort' && type !== 'kitchen') {
-      setActive((prevState) => !prevState);
-    }
+    setActive((prevState) => !prevState);
   };
 
   const classNames = cn(s.itemContainer, {
