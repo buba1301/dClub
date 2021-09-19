@@ -24,8 +24,8 @@ const DropMenuButton = ({ name, type, types }: Props) => {
 
   const ref = React.useRef<HTMLDivElement>(null);
 
-  const handleClick = () => {
-    setOpenDrop((prevState) => !prevState);
+  const handleClickOpen = () => {
+    !openDrop && setOpenDrop(true);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -37,8 +37,6 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   };
 
   const handleCheck = (event: React.SyntheticEvent<HTMLInputElement>) => {
-    // console.log(event.target.id);
-
     const { id } = event.target as Element;
 
     setChecked((prevState) =>
@@ -50,6 +48,8 @@ const DropMenuButton = ({ name, type, types }: Props) => {
 
   useOnClickOutside(ref, handleClickOutside);
 
+  // const isDisable = checkedFiltersList.length === 0;
+
   const classNames = cn(s.itemContainer, {
     [s.active]: active,
   });
@@ -60,7 +60,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
 
   return (
     <>
-      <div className={classNames} id={type} onClick={handleClick}>
+      <div className={classNames} id={type} onClick={handleClickOpen}>
         {name}
       </div>
       {openDrop && (

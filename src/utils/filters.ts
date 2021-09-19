@@ -32,7 +32,7 @@ export const restorantFilters: FiltersItems[] = [
       },
       {
         type: 'popular',
-        name: 'С высоким рейтингом',
+        name: 'Самые популярные',
       },
     ],
   },
