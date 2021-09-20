@@ -3,7 +3,12 @@ import * as React from 'react';
 import s from './Vendor.module.scss';
 import Tabs from '../../components/Tabs';
 import Filters from '../../components/Filters';
-import { restorantFilters, FiltersItems, shopsFilters, ActiveFilters } from '../../utils/filters';
+import {
+  restorantFilters,
+  FiltersItems,
+  shopsFilters,
+  ActiveFilters,
+} from '../../utils/filters';
 import FiltersContext from '../../Context';
 
 type FiltersList = {
@@ -12,7 +17,7 @@ type FiltersList = {
 
 export type Actions = {
   type: string;
-  value: string;
+  payload: string;
 };
 
 const filtersListOnPage: FiltersList = {
@@ -20,12 +25,15 @@ const filtersListOnPage: FiltersList = {
   shops: shopsFilters,
 };
 
-function reducerActiveFilters(state: ActiveFilters[], action: Actions): ActiveFilters[] {
+function reducerActiveFilters(
+  state: ActiveFilters[],
+  action: Actions,
+): ActiveFilters[] {
   switch (action.type) {
     case 'addFilter':
-      return [...state, { type: action.value }];
+      return [...state, { type: action.payload }];
     case 'removeFilter':
-      return state.filter(({ type }) => type !== action.value);
+      return state.filter(({ type }) => type !== action.payload);
     default:
       throw new Error();
   }

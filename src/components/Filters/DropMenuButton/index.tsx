@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import * as React from 'react';
-import { find } from 'lodash';
+// mport { find } from 'lodash';
 import cn from 'classnames';
 import useOnClickOutside from '../../../hooks/useOnClickOutSide';
 import { ActiveFilters, TypesList } from '../../../utils/filters';
 // import FiltersContext from '../../../Context';
 
 import s from './DropMenu.module.scss';
+import CheckBox from './CheckBox';
 
 type Props = {
   name: string;
@@ -15,10 +16,54 @@ type Props = {
   types: TypesList[];
 };
 
+/* type State = {
+  checkedSortFilter: TypesList;
+  chekedKitchenFilters: TypesList[];
+}; */
+
+/* type State = {
+  sortCheckBox: string;
+  kitchenCheckBox: {
+    [key: string]: string;
+  };
+};
+
+type Action = {
+  type: string;
+  payload: TypesList;
+}; */
+
+/* const reducerCheckedFilters = (state: State, action: Action) => {
+  switch (action.type) {
+    case 'sortAdd':
+      return { ...state, checkedSortFilter: action.payload };
+    case 'sortRemove':
+      return { ...state, checkedSortFilter: '' };
+    case 'kitchenAdd':
+      return {
+        ...state,
+        chekedKitchenFilters: [...state.chekedKitchenFilters, action.payload],
+      };
+    case 'kitchenRemove':
+      return {
+        ...state,
+        chekedKitchenFilters: state.chekedKitchenFilters.filter(
+          (item) => item.type !== action.payload.type,
+        ),
+      };
+    default:
+      throw new Error();
+  }
+}; */
+
 const DropMenuButton = ({ name, type, types }: Props) => {
   const [openDrop, setOpenDrop] = React.useState(false);
-  const [active] = React.useState(false);
-  const [checkedFiltersList, setChecked] = React.useState<ActiveFilters[]>([]);
+  const [sortType, setSortType] = React.useState('');
+  const [checkedFiltersList] = React.useState<ActiveFilters[]>([]);
+  /* const [, dispatchCheckedFilters] = React.useReducer(reducerCheckedFilters, {
+    checkedSortFilter: '',
+    chekedKitchenFilters: [],
+  }); */
 
   // const dispatch = React.useContext(FiltersContext);
 
@@ -36,14 +81,9 @@ const DropMenuButton = ({ name, type, types }: Props) => {
     }
   };
 
-  const handleCheck = (event: React.SyntheticEvent<HTMLInputElement>) => {
-    const { id } = event.target as Element;
-
-    setChecked((prevState) =>
-      find(prevState, { type: id })
-        ? prevState.filter((item) => item.type !== id)
-        : [...prevState, { type: id }],
-    );
+  const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // console.log('FORM', event);
   };
 
   useOnClickOutside(ref, handleClickOutside);
@@ -51,7 +91,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   // const isDisable = checkedFiltersList.length === 0;
 
   const classNames = cn(s.itemContainer, {
-    [s.active]: active,
+    // [s.active]: active,
   });
 
   const style = {
@@ -65,21 +105,18 @@ const DropMenuButton = ({ name, type, types }: Props) => {
       </div>
       {openDrop && (
         <div className={s.container} style={style} ref={ref}>
-          <form className={s.formWrap}>
+          <form className={s.formWrap} onSubmit={handleSubmit}>
             <div className={s.content}>
               {types &&
                 types.map((item) => (
-                  <label
-                    htmlFor={item.type}
+                  <CheckBox
                     key={item.type}
-                    className={s.itemWrap}>
-                    <input
-                      type="checkbox"
-                      id={item.type}
-                      onClick={handleCheck}
-                    />
-                    <span>{item.name}</span>
-                  </label>
+                    type={item.type}
+                    name={item.name}
+                    filterType={type}
+                    sortType={sortType}
+                    setSortType={setSortType}
+                  />
                 ))}
             </div>
             <div className={s.buttonContainer}>

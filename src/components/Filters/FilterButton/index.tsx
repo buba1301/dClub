@@ -17,7 +17,10 @@ const FilterButton = ({ name, type }: Props) => {
   const dispatch = React.useContext(FiltersContext);
 
   const handleClick = (event: React.SyntheticEvent<HTMLDivElement>) => {
-    active === true ? dispatch({ type: 'removeFilter', value: type }) : dispatch({ type: 'addFilter', value: type });
+    active === true
+      ? dispatch({ type: 'removeFilter', payload: type })
+      : dispatch({ type: 'addFilter', payload: type });
+
     setActive((prevState) => !prevState);
   };
 
