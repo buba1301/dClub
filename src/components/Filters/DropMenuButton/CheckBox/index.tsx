@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
+import { useFormContext } from 'react-hook-form';
 
 import s from './CheckBox.module.scss';
 
@@ -9,22 +10,14 @@ type Props = {
   filterType: string;
   sortType: string;
   setSortType: React.Dispatch<React.SetStateAction<string>>;
-  register: any;
-  reset: any;
 };
 
-const CheckBox = ({
-  type,
-  name,
-  filterType,
-  sortType,
-  setSortType,
-  register,
-  reset,
-}: Props) => {
+const CheckBox = ({ type, name, filterType, sortType, setSortType }: Props) => {
   const [active, setActive] = React.useState(false);
 
-  const formValue = register(type);
+  const { register, reset } = useFormContext();
+
+  const formValue = register(type as `${string}`);
 
   const handleChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
     const { id } = event.currentTarget;
@@ -35,9 +28,6 @@ const CheckBox = ({
     } else {
       setActive((prevState) => !prevState);
     }
-    /* filterType === 'sort'
-        ? setSortType((prevState) => (prevState !== id ? id : ''))
-        : setActive((prevState) => !prevState); */
   };
 
   return (

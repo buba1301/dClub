@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import * as React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 // mport { find } from 'lodash';
 import cn from 'classnames';
 import useOnClickOutside from '../../../hooks/useOnClickOutSide';
@@ -63,7 +64,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   const [sortType, setSortType] = React.useState('');
   const [checkedFiltersList] = React.useState<ActiveFilters[]>([]);
 
-  const { register, handleSubmit, reset } = useForm({ [type]: [] });
+  const methods = useForm();
   /* const [, dispatchCheckedFilters] = React.useReducer(reducerCheckedFilters, {
     checkedSortFilter: '',
     chekedKitchenFilters: [],
@@ -83,7 +84,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
     if (type !== id) {
       setOpenDrop(false);
       setSortType('');
-      reset();
+      methods.reset();
     }
   };
 
@@ -93,6 +94,8 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   }; */
 
   const onSubmit = (data: any) => null;
+
+  // console.log('FOrm value', data)
 
   useOnClickOutside(ref, handleClickOutside);
   useLockBodyScroll(openDrop);
@@ -119,33 +122,35 @@ const DropMenuButton = ({ name, type, types }: Props) => {
       {openDrop && (
         <>
           <div className={classNameContainer} ref={ref}>
-            <form className={s.formWrap} onSubmit={handleSubmit(onSubmit)}>
-              <div className={s.content}>
-                {types &&
-                  types.map((item) => (
-                    <CheckBox
-                      key={item.type}
-                      type={item.type}
-                      name={item.name}
-                      filterType={type}
-                      sortType={sortType}
-                      setSortType={setSortType}
-                      register={register}
-                      reset={reset}
-                    />
-                  ))}
-              </div>
-              <div className={s.buttonContainer}>
-                {checkedFiltersList.length !== 0 ? (
-                  <>
-                    <button type="button">Сбросить</button>
+            <FormProvider {...methods}>
+              <form
+                className={s.formWrap}
+                onSubmit={methods.handleSubmit(onSubmit)}>
+                <div className={s.content}>
+                  {types &&
+                    types.map((item) => (
+                      <CheckBox
+                        key={item.type}
+                        type={item.type}
+                        name={item.name}
+                        filterType={type}
+                        sortType={sortType}
+                        setSortType={setSortType}
+                      />
+                    ))}
+                </div>
+                <div className={s.buttonContainer}>
+                  {checkedFiltersList.length !== 0 ? (
+                    <>
+                      <button type="button">Сбросить</button>
+                      <button type="submit">Применить</button>
+                    </>
+                  ) : (
                     <button type="submit">Применить</button>
-                  </>
-                ) : (
-                  <button type="submit">Применить</button>
-                )}
-              </div>
-            </form>
+                  )}
+                </div>
+              </form>
+            </FormProvider>
           </div>
           <div className={s.background} />
         </>
