@@ -42,7 +42,7 @@
 
 @media (max-width: 640px) {
   .tabsContainer {
-    height: fit-content;
+    height: auto;
     flex-direction: column;
     align-items: flex-start;
   }

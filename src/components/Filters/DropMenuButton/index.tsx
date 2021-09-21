@@ -9,6 +9,7 @@ import { ActiveFilters, TypesList } from '../../../utils/filters';
 
 import s from './DropMenu.module.scss';
 import CheckBox from './CheckBox';
+import useLockBodyScroll from '../../../hooks/useLockBodyScroll';
 
 type Props = {
   name: string;
@@ -78,6 +79,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
 
     if (type !== id) {
       setOpenDrop(false);
+      setSortType('');
     }
   };
 
@@ -87,50 +89,58 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   };
 
   useOnClickOutside(ref, handleClickOutside);
+  useLockBodyScroll(openDrop);
 
   // const isDisable = checkedFiltersList.length === 0;
 
-  const classNames = cn(s.itemContainer, {
+  const classNamesItemContainer = cn(s.itemContainer, {
     // [s.active]: active,
   });
 
-  const style = {
-    left: type === 'kitchen' ? '300px' : '0',
-  };
+  const classNameContainer = cn(s.container, {
+    [s.kitchenFilter]: type === 'kitchen',
+    [s.sortFilter]: type === 'sort',
+  });
 
   return (
     <>
-      <div className={classNames} id={type} onClick={handleClickOpen}>
+      <div
+        className={classNamesItemContainer}
+        id={type}
+        onClick={handleClickOpen}>
         {name}
       </div>
       {openDrop && (
-        <div className={s.container} style={style} ref={ref}>
-          <form className={s.formWrap} onSubmit={handleSubmit}>
-            <div className={s.content}>
-              {types &&
-                types.map((item) => (
-                  <CheckBox
-                    key={item.type}
-                    type={item.type}
-                    name={item.name}
-                    filterType={type}
-                    sortType={sortType}
-                    setSortType={setSortType}
-                  />
-                ))}
-            </div>
-            <div className={s.buttonContainer}>
-              {checkedFiltersList.length !== 0 ? (
-                <>
-                  <button type="button">Сбросить</button>
+        <>
+          <div className={classNameContainer} ref={ref}>
+            <form className={s.formWrap} onSubmit={handleSubmit}>
+              <div className={s.content}>
+                {types &&
+                  types.map((item) => (
+                    <CheckBox
+                      key={item.type}
+                      type={item.type}
+                      name={item.name}
+                      filterType={type}
+                      sortType={sortType}
+                      setSortType={setSortType}
+                    />
+                  ))}
+              </div>
+              <div className={s.buttonContainer}>
+                {checkedFiltersList.length !== 0 ? (
+                  <>
+                    <button type="button">Сбросить</button>
+                    <button type="submit">Применить</button>
+                  </>
+                ) : (
                   <button type="submit">Применить</button>
-                </>
-              ) : (
-                <button type="submit">Применить</button>
-              )}
-            </div>
-          </form>
-        </div>
+                )}
+              </div>
+            </form>
+          </div>
+          <div className={s.background} />
+        </>
       )}
     </>
   );

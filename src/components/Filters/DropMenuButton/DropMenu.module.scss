@@ -24,10 +24,17 @@
   background: #46464e;
 }
 
+.kitchenFilter {
+  left: 300px;
+}
+
+.sortFilter {
+  left: 0;
+}
+
 .container {
   position: absolute;
   top: 100px;
-  left: 0;
   width: 316px;
   height: auto;
   padding: 30px 32px 16px 32px;
@@ -37,6 +44,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 13000;
+}
+
+.background {
+  display: none;
 }
 
 .formWrap {
@@ -47,6 +59,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  background-color: #f6f6f6;
 }
 
 .content {
@@ -83,4 +96,35 @@
   width: 100%;
   height: 100%;
   cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .container {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    top: unset;
+    height: auto;
+    border-radius: 16px 16px 0px 0px;
+    animation: 0.2s ease-out 0s 1 slideInFromBottom;
+    transition: margin-bottom 0.2s ease-out;
+    z-index: 60000;
+    overflow: hidden;
+  }
+
+  .background {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 50000;
+  }
+
+  .formWrap {
+    max-height: none;
+  }
 }

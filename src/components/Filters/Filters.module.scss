@@ -28,7 +28,8 @@
 
 @media (max-width: 1024px) {
   .filtersContainer {
-    overflow: scroll;
+    overflow-x: scroll;
     scroll-behavior: smooth;
+    height: max-content;
   }
 }

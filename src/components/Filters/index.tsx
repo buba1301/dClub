@@ -15,7 +15,12 @@ const Filters = ({ filtersList }: Props) => (
   <div className={s.filtersContainer}>
     {filtersList.map((item) =>
       item.types ? (
-        <DropMenuButton key={item.type} name={item.name} type={item.type} types={item.types} />
+        <DropMenuButton
+          key={item.type}
+          name={item.name}
+          type={item.type}
+          types={item.types}
+        />
       ) : (
         <FilterButton key={item.type} name={item.name} type={item.type} />
       ),
