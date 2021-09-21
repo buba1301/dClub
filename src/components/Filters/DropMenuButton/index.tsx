@@ -6,7 +6,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 // mport { find } from 'lodash';
 import cn from 'classnames';
 import useOnClickOutside from '../../../hooks/useOnClickOutSide';
-import { ActiveFilters, TypesList } from '../../../utils/filters';
+import { TypesList } from '../../../utils/filters';
 // import FiltersContext from '../../../Context';
 
 import s from './DropMenu.module.scss';
@@ -62,15 +62,28 @@ type Action = {
 const DropMenuButton = ({ name, type, types }: Props) => {
   const [openDrop, setOpenDrop] = React.useState(false);
   const [sortType, setSortType] = React.useState('');
-  const [checkedFiltersList] = React.useState<ActiveFilters[]>([]);
+  const [buttonDisable, setButtonDisable] = React.useState(true);
 
-  const methods = useForm();
+  const initState = types.reduce(
+    (acc, item) => ({ ...acc, [item.type]: false }),
+    {},
+  );
+
+  const methods = useForm(initState);
   /* const [, dispatchCheckedFilters] = React.useReducer(reducerCheckedFilters, {
     checkedSortFilter: '',
     chekedKitchenFilters: [],
   }); */
 
   // const dispatch = React.useContext(FiltersContext);
+
+  React.useEffect(() => {
+    const checkBoxStateValues = methods.getValues();
+
+    const isActiveCheckBox = Object.values(checkBoxStateValues).includes(true);
+
+    setButtonDisable(!isActiveCheckBox);
+  }, [sortType]);
 
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -88,10 +101,10 @@ const DropMenuButton = ({ name, type, types }: Props) => {
     }
   };
 
-  /* const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log('FORM', event);
-  }; */
+  const handleReset = () => {
+    setSortType('');
+    methods.reset();
+  };
 
   const onSubmit = (data: any) => null;
 
@@ -140,13 +153,17 @@ const DropMenuButton = ({ name, type, types }: Props) => {
                     ))}
                 </div>
                 <div className={s.buttonContainer}>
-                  {checkedFiltersList.length !== 0 ? (
+                  {!buttonDisable ? (
                     <>
-                      <button type="button">Сбросить</button>
+                      <button type="button" onClick={handleReset}>
+                        Сбросить
+                      </button>
                       <button type="submit">Применить</button>
                     </>
                   ) : (
-                    <button type="submit">Применить</button>
+                    <button type="submit" disabled={buttonDisable}>
+                      Применить
+                    </button>
                   )}
                 </div>
               </form>
