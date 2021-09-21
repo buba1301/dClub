@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import * as React from 'react';
+import { useForm } from 'react-hook-form';
 // mport { find } from 'lodash';
 import cn from 'classnames';
 import useOnClickOutside from '../../../hooks/useOnClickOutSide';
@@ -61,6 +62,8 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   const [openDrop, setOpenDrop] = React.useState(false);
   const [sortType, setSortType] = React.useState('');
   const [checkedFiltersList] = React.useState<ActiveFilters[]>([]);
+
+  const { register, handleSubmit, reset } = useForm({ [type]: [] });
   /* const [, dispatchCheckedFilters] = React.useReducer(reducerCheckedFilters, {
     checkedSortFilter: '',
     chekedKitchenFilters: [],
@@ -80,13 +83,16 @@ const DropMenuButton = ({ name, type, types }: Props) => {
     if (type !== id) {
       setOpenDrop(false);
       setSortType('');
+      reset();
     }
   };
 
-  const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+  /* const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // console.log('FORM', event);
-  };
+    console.log('FORM', event);
+  }; */
+
+  const onSubmit = (data: any) => null;
 
   useOnClickOutside(ref, handleClickOutside);
   useLockBodyScroll(openDrop);
@@ -113,7 +119,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
       {openDrop && (
         <>
           <div className={classNameContainer} ref={ref}>
-            <form className={s.formWrap} onSubmit={handleSubmit}>
+            <form className={s.formWrap} onSubmit={handleSubmit(onSubmit)}>
               <div className={s.content}>
                 {types &&
                   types.map((item) => (
@@ -124,6 +130,8 @@ const DropMenuButton = ({ name, type, types }: Props) => {
                       filterType={type}
                       sortType={sortType}
                       setSortType={setSortType}
+                      register={register}
+                      reset={reset}
                     />
                   ))}
               </div>
