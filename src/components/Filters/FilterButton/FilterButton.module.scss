@@ -1,45 +1,33 @@
 .itemContainer {
-  position: relative;
   height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.filterButton {
+  width: 100%;
+  height: 44px;
+  border-radius: 12px;
+  border: 0;
+  padding: 12px 16px;
 
   display: flex;
-  justify-content: center;
   align-items: center;
-  border-radius: 12px;
 
   background-color: #f6f6f6;
-  padding: 12px 16px;
+
   cursor: pointer;
 }
 
-.itemContainer:hover {
+.filterButton:hover {
   background-color: #ecedf0;
 }
 
-.itemContainer input {
-  position: absolute;
-  top: 44px;
-  background-color: transparent;
-  outline: none;
-  border: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.itemContainer label {
-  cursor: pointer;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .active {
-  background: #2e2e33;
+  background-color: #2e2e33;
   color: #fff;
 }
 
 .active:hover {
-  background: #46464e;
+  background-color: #46464e;
 }

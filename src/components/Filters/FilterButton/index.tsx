@@ -4,7 +4,6 @@ import * as React from 'react';
 import cn from 'classnames';
 
 import s from './FilterButton.module.scss';
-import FiltersContext from '../../../Context';
 
 // TODO: любимые если не авторизован то форма авторизации
 
@@ -16,24 +15,23 @@ type Props = {
 const FilterButton = ({ name, type }: Props) => {
   const [active, setActive] = React.useState(false);
 
-  const dispatch = React.useContext(FiltersContext);
-
-  const handleClick = (event: React.SyntheticEvent<HTMLDivElement>) => {
-    active
-      ? dispatch({ type: 'removeFilter', payload: type })
-      : dispatch({ type: 'addFilter', payload: type });
-
+  const handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
     setActive((prevState) => !prevState);
   };
 
-  const classNames = cn(s.itemContainer, {
+  const classNames = cn(s.filterButton, {
     [s.active]: active,
   });
 
   return (
-    <div className={classNames} id={type} onClick={handleClick}>
-      <input id={type} type="checkbox" />
-      <label htmlFor={type}>{name}</label>
+    <div className={s.itemContainer} id={type}>
+      <button
+        id={type}
+        className={classNames}
+        type="submit"
+        onClick={handleClick}>
+        {name}
+      </button>
     </div>
   );
 };
