@@ -10,6 +10,7 @@ import {
   ActiveFilters,
 } from '../../utils/filters';
 import FiltersContext from '../../Context';
+import normalizeFiltersList from '../../utils/normalize';
 
 type FiltersList = {
   [key: string]: FiltersItems[];
@@ -46,7 +47,7 @@ const Vendor = () => {
   const [, dispatch] = React.useReducer(reducerActiveFilters, []);
 
   React.useEffect(() => {
-    setFiltersList(filtersListOnPage[currentTab]);
+    setFiltersList(normalizeFiltersList(filtersListOnPage[currentTab]));
   }, [currentTab]);
 
   return (

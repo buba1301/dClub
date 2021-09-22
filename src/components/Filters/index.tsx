@@ -18,29 +18,44 @@ const Filters = ({ filtersList }: Props) => {
     setActiveClearFiltersButton,
   ] = React.useState(false);
 
+  const [activeFilters, setActiveFilters] = React.useState<FiltersItems[]>([]);
+
+  React.useEffect(() => {
+    setActiveFilters(filtersList);
+  }, [filtersList]);
+
+  React.useEffect(() => {
+    const hasActiveFilters = activeFilters.map((item) => item.active);
+
+    setActiveClearFiltersButton(hasActiveFilters.includes(true));
+  }, [activeFilters]);
+
   const handleClose = () => {
+    setActiveFilters((prevState) =>
+      prevState.map((item) => ({ ...item, active: false })),
+    );
     setActiveClearFiltersButton(false);
   };
 
   return (
     <div className={s.filtersContainer}>
-      {filtersList.map((item) =>
+      {activeFilters.map((item) =>
         item.types ? (
           <DropMenuButton
             key={item.type}
             name={item.name}
             type={item.type}
             types={item.types}
-            activeClearFiltersButton={activeClearFiltersButton}
-            showCloseButton={setActiveClearFiltersButton}
+            active={item.active}
+            setActiveFilters={setActiveFilters}
           />
         ) : (
           <FilterButton
             key={item.type}
             name={item.name}
             type={item.type}
-            activeClearFiltersButton={activeClearFiltersButton}
-            showCloseButton={setActiveClearFiltersButton}
+            active={item.active}
+            setActiveFilters={setActiveFilters}
           />
         ),
       )}

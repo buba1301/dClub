@@ -2,58 +2,66 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import * as React from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-// mport { find } from 'lodash';
 import cn from 'classnames';
 import useOnClickOutside from '../../../hooks/useOnClickOutSide';
 import { TypesList } from '../../../utils/filters';
-// import FiltersContext from '../../../Context';
 
 import s from './DropMenu.module.scss';
-import CheckBox from './CheckBox';
 import useLockBodyScroll from '../../../hooks/useLockBodyScroll';
+import normalizeFiltersList from '../../../utils/normalize';
 
 type Props = {
   name: string;
   type: string;
   types: TypesList[];
-  showCloseButton: React.Dispatch<React.SetStateAction<boolean>>;
-  activeClearFiltersButton: boolean;
+  active: boolean | undefined;
+  setActiveFilters: Function;
 };
 
 const DropMenuButton = ({
   name,
   type,
   types,
-  showCloseButton,
-  activeClearFiltersButton,
+  active,
+  setActiveFilters,
 }: Props) => {
   const [openDrop, setOpenDrop] = React.useState(false);
-  const [sortType, setSortType] = React.useState('');
   const [buttonDisable, setButtonDisable] = React.useState(true);
-  const [activeFilterButton, setActiveFilterButton] = React.useState(false);
+  const [filtersTypes, setfiltersTypes] = React.useState<TypesList[]>([]);
 
   const matchMediaValue = '(max-width: 640px)';
 
-  const methods = useForm();
-
-  // const dispatch = React.useContext(FiltersContext);
-
-  React.useEffect(() => {
-    !activeClearFiltersButton && setActiveFilterButton(false);
-    setSortType('');
-    methods.reset();
-  }, [activeClearFiltersButton]);
-
-  React.useEffect(() => {
-    const checkBoxStateValues = methods.getValues();
-
-    const isActiveCheckBox = Object.values(checkBoxStateValues).includes(true);
-
-    setButtonDisable(!isActiveCheckBox);
-  }, [sortType]);
-
   const ref = React.useRef<HTMLDivElement>(null);
+
+  const resetFilters = {
+    resetfiltersTypes: () =>
+      setfiltersTypes((prevState) =>
+        prevState.map((item) => ({ ...item, active: false })),
+      ),
+    resetActiveFilters: () =>
+      setActiveFilters((prevState: any) =>
+        prevState.map((item: any) =>
+          item.type === type ? { ...item, active: false } : item,
+        ),
+      ),
+  };
+
+  React.useEffect(() => {
+    setfiltersTypes(normalizeFiltersList(types));
+  }, []);
+
+  React.useEffect(() => {
+    if (active === false) {
+      resetFilters.resetfiltersTypes();
+      resetFilters.resetActiveFilters();
+    }
+  }, [active]);
+
+  React.useEffect(() => {
+    const hasActiveFilter = filtersTypes.map((item) => item.active);
+
+    setButtonDisable(!hasActiveFilter.includes(true));
+  }, [filtersTypes]);
 
   const handleClickOpen = () => {
     !openDrop && setOpenDrop(true);
@@ -64,23 +72,39 @@ const DropMenuButton = ({
 
     if (type !== id) {
       setOpenDrop(false);
-      setSortType('');
-      setActiveFilterButton(false);
-      methods.reset();
+      resetFilters.resetfiltersTypes();
     }
   };
 
   const handleReset = () => {
-    methods.reset();
-    setSortType('');
-    setActiveFilterButton(false);
+    resetFilters.resetfiltersTypes();
+    resetFilters.resetActiveFilters();
+  };
+
+  const handleChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget;
+
+    const mapped = (item: TypesList) => {
+      const currentItem = {
+        ...item,
+        active: !item.active,
+      };
+
+      const otherItem = type === 'sort' ? { ...item, active: false } : item;
+
+      return item.type === value ? currentItem : otherItem;
+    };
+
+    setfiltersTypes((prevState) => prevState.map(mapped));
   };
 
   const onSubmit = (data: any) => {
     setOpenDrop(false);
-    setActiveFilterButton(true);
-    showCloseButton(true);
-    // console.log('Form value', data);
+    setActiveFilters((prevState: any) =>
+      prevState.map((item: any) =>
+        item.type === type ? { ...item, active: !item.active } : item,
+      ),
+    );
   };
 
   useOnClickOutside(ref, handleClickOutside);
@@ -88,7 +112,7 @@ const DropMenuButton = ({
   useLockBodyScroll(openDrop, matchMediaValue);
 
   const classNamesItemContainer = cn(s.itemContainer, {
-    [s.active]: activeFilterButton,
+    [s.active]: active,
   });
 
   const classNamesContainer = cn(s.container, {
@@ -111,47 +135,49 @@ const DropMenuButton = ({
       {openDrop && (
         <>
           <div className={classNamesContainer} ref={ref}>
-            <FormProvider {...methods}>
-              <form
-                className={s.formWrap}
-                onSubmit={methods.handleSubmit(onSubmit)}>
-                <div className={s.content}>
-                  {types &&
-                    types.map((item) => (
-                      <CheckBox
-                        key={item.type}
-                        type={item.type}
-                        name={item.name}
-                        filterType={type}
-                        sortType={sortType}
-                        setSortType={setSortType}
+            <form className={s.formWrap} onSubmit={onSubmit}>
+              <div className={s.content}>
+                {filtersTypes &&
+                  filtersTypes.map((item) => (
+                    <label
+                      htmlFor={item.type}
+                      key={item.type}
+                      className={s.itemWrap}>
+                      <input
+                        type="checkbox"
+                        name={item.type}
+                        id={item.type}
+                        value={item.type}
+                        checked={item.active}
+                        onChange={handleChange}
                       />
-                    ))}
-                </div>
-                <div className={s.buttonContainer}>
-                  {!buttonDisable ? (
-                    <>
-                      <button
-                        type="button"
-                        className={s.buttonReset}
-                        onClick={handleReset}>
-                        Сбросить
-                      </button>
-                      <button type="submit" className={s.buttonSubmit}>
-                        Применить
-                      </button>
-                    </>
-                  ) : (
+                      <span>{item.name}</span>
+                    </label>
+                  ))}
+              </div>
+              <div className={s.buttonContainer}>
+                {!buttonDisable ? (
+                  <>
                     <button
-                      type="submit"
-                      className={classNamesButton}
-                      disabled={buttonDisable}>
+                      type="button"
+                      className={s.buttonReset}
+                      onClick={handleReset}>
+                      Сбросить
+                    </button>
+                    <button type="submit" className={s.buttonSubmit}>
                       Применить
                     </button>
-                  )}
-                </div>
-              </form>
-            </FormProvider>
+                  </>
+                ) : (
+                  <button
+                    type="submit"
+                    className={classNamesButton}
+                    disabled={buttonDisable}>
+                    Применить
+                  </button>
+                )}
+              </div>
+            </form>
           </div>
           <div className={s.background} />
         </>

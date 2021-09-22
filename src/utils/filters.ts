@@ -5,12 +5,14 @@ export type ActiveFilters = {
 export type TypesList = {
   name: string;
   type: string;
+  active?: boolean;
 };
 
 export type FiltersItems = {
   type: string;
   name: string;
   types?: TypesList[];
+  active?: boolean;
 };
 
 export const restorantFilters: FiltersItems[] = [
