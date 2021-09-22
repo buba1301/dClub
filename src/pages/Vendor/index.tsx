@@ -18,7 +18,7 @@ type FiltersList = {
 
 export type Actions = {
   type: string;
-  payload: string;
+  payload: string | string[];
 };
 
 const filtersListOnPage: FiltersList = {

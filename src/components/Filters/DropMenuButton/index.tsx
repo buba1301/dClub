@@ -9,7 +9,7 @@ import { TypesList } from '../../../utils/filters';
 import s from './DropMenu.module.scss';
 import useLockBodyScroll from '../../../hooks/useLockBodyScroll';
 import normalizeFiltersList from '../../../utils/normalize';
-// import FiltersContext from '../../../Context';
+import FiltersContext from '../../../Context';
 
 type Props = {
   name: string;
@@ -30,7 +30,7 @@ const DropMenuButton = ({
   const [buttonDisable, setButtonDisable] = React.useState(true);
   const [filtersTypes, setfiltersTypes] = React.useState<TypesList[]>([]);
 
-  // const dispatch = React.useContext(FiltersContext);
+  const dispatch = React.useContext(FiltersContext);
 
   const matchMediaValue = '(max-width: 640px)';
 
@@ -80,13 +80,18 @@ const DropMenuButton = ({
 
     if (type !== id) {
       setOpenDrop(false);
-      resetFilters.resetfiltersTypes();
+
+      if (!active) {
+        resetFilters.resetfiltersTypes();
+        dispatch({ type: 'removeFilter', payload: [] });
+      }
     }
   };
 
   const handleReset = () => {
     resetFilters.resetfiltersTypes();
     resetFilters.resetActiveFilters();
+    dispatch({ type: 'removeFilter', payload: [] });
   };
 
   const handleChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
@@ -114,8 +119,12 @@ const DropMenuButton = ({
         item.type === type ? { ...item, active: true } : item,
       ),
     );
+
+    const activeFilters = filtersTypes
+      .filter((item) => item.active)
+      .map((item) => item.type);
     // запрос на сервер или в стейт в вендоре??
-    // dispatch({ type: 'addFilter', payload: })
+    dispatch({ type: 'addFilter', payload: activeFilters });
   };
 
   useOnClickOutside(ref, handleClickOutside);
