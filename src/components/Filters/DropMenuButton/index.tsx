@@ -19,46 +19,6 @@ type Props = {
   types: TypesList[];
 };
 
-/* type State = {
-  checkedSortFilter: TypesList;
-  chekedKitchenFilters: TypesList[];
-}; */
-
-/* type State = {
-  sortCheckBox: string;
-  kitchenCheckBox: {
-    [key: string]: string;
-  };
-};
-
-type Action = {
-  type: string;
-  payload: TypesList;
-}; */
-
-/* const reducerCheckedFilters = (state: State, action: Action) => {
-  switch (action.type) {
-    case 'sortAdd':
-      return { ...state, checkedSortFilter: action.payload };
-    case 'sortRemove':
-      return { ...state, checkedSortFilter: '' };
-    case 'kitchenAdd':
-      return {
-        ...state,
-        chekedKitchenFilters: [...state.chekedKitchenFilters, action.payload],
-      };
-    case 'kitchenRemove':
-      return {
-        ...state,
-        chekedKitchenFilters: state.chekedKitchenFilters.filter(
-          (item) => item.type !== action.payload.type,
-        ),
-      };
-    default:
-      throw new Error();
-  }
-}; */
-
 const DropMenuButton = ({ name, type, types }: Props) => {
   const [openDrop, setOpenDrop] = React.useState(false);
   const [sortType, setSortType] = React.useState('');
@@ -68,10 +28,6 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   const matchMediaValue = '(max-width: 640px)';
 
   const methods = useForm();
-  /* const [, dispatchCheckedFilters] = React.useReducer(reducerCheckedFilters, {
-    checkedSortFilter: '',
-    chekedKitchenFilters: [],
-  }); */
 
   // const dispatch = React.useContext(FiltersContext);
 
@@ -112,8 +68,6 @@ const DropMenuButton = ({ name, type, types }: Props) => {
     // console.log('Form value', data);
   };
 
-  // console.log('FOrm value', data)
-
   useOnClickOutside(ref, handleClickOutside);
 
   useLockBodyScroll(openDrop, matchMediaValue);
@@ -122,7 +76,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
     [s.active]: activeFilterButton,
   });
 
-  const classNameContainer = cn(s.container, {
+  const classNamesContainer = cn(s.container, {
     [s.kitchenFilter]: type === 'kitchen',
     [s.sortFilter]: type === 'sort',
   });
@@ -141,7 +95,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
       </div>
       {openDrop && (
         <>
-          <div className={classNameContainer} ref={ref}>
+          <div className={classNamesContainer} ref={ref}>
             <FormProvider {...methods}>
               <form
                 className={s.formWrap}

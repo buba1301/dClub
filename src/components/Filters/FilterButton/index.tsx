@@ -6,6 +6,8 @@ import cn from 'classnames';
 import s from './FilterButton.module.scss';
 import FiltersContext from '../../../Context';
 
+// TODO: любимые если не авторизован то форма авторизации
+
 type Props = {
   name: string;
   type: string;
