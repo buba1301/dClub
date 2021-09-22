@@ -63,6 +63,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   const [openDrop, setOpenDrop] = React.useState(false);
   const [sortType, setSortType] = React.useState('');
   const [buttonDisable, setButtonDisable] = React.useState(true);
+  const [activeFilterButton, setActiveFilterButton] = React.useState(false);
 
   const matchMediaValue = '(max-width: 640px)';
 
@@ -94,6 +95,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
     if (type !== id) {
       setOpenDrop(false);
       setSortType('');
+      setActiveFilterButton(false);
       methods.reset();
     }
   };
@@ -101,9 +103,14 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   const handleReset = () => {
     methods.reset();
     setSortType('');
+    setActiveFilterButton(false);
   };
 
-  const onSubmit = (data: any) => null;
+  const onSubmit = (data: any) => {
+    setOpenDrop(false);
+    setActiveFilterButton(true);
+    // console.log('Form value', data);
+  };
 
   // console.log('FOrm value', data)
 
@@ -112,7 +119,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   useLockBodyScroll(openDrop, matchMediaValue);
 
   const classNamesItemContainer = cn(s.itemContainer, {
-    // [s.active]: active,
+    [s.active]: activeFilterButton,
   });
 
   const classNameContainer = cn(s.container, {

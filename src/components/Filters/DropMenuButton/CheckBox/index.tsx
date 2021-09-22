@@ -33,8 +33,8 @@ const CheckBox = ({ type, name, filterType, sortType, setSortType }: Props) => {
       setSortType((prevState) => (prevState !== id ? id : ''));
       reset();
     } else {
-      setSortType((prevState) => (prevState !== id ? id : ''));
       setActive((prevState) => !prevState);
+      setSortType((prevState) => (prevState !== id ? id : prevState));
     }
   };
 
