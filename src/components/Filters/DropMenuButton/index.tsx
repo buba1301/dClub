@@ -64,6 +64,8 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   const [sortType, setSortType] = React.useState('');
   const [buttonDisable, setButtonDisable] = React.useState(true);
 
+  const matchMediaValue = '(max-width: 640px)';
+
   const initState = types.reduce(
     (acc, item) => ({ ...acc, [item.type]: false }),
     {},
@@ -111,7 +113,8 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   // console.log('FOrm value', data)
 
   useOnClickOutside(ref, handleClickOutside);
-  useLockBodyScroll(openDrop);
+
+  useLockBodyScroll(openDrop, matchMediaValue);
 
   // const isDisable = checkedFiltersList.length === 0;
 
@@ -122,6 +125,10 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   const classNameContainer = cn(s.container, {
     [s.kitchenFilter]: type === 'kitchen',
     [s.sortFilter]: type === 'sort',
+  });
+
+  const classNamesButton = cn(s.buttonSubmit, {
+    [s.buttonDisabled]: buttonDisable,
   });
 
   return (
@@ -155,13 +162,21 @@ const DropMenuButton = ({ name, type, types }: Props) => {
                 <div className={s.buttonContainer}>
                   {!buttonDisable ? (
                     <>
-                      <button type="button" onClick={handleReset}>
+                      <button
+                        type="button"
+                        className={s.buttonReset}
+                        onClick={handleReset}>
                         Сбросить
                       </button>
-                      <button type="submit">Применить</button>
+                      <button type="submit" className={s.buttonSubmit}>
+                        Применить
+                      </button>
                     </>
                   ) : (
-                    <button type="submit" disabled={buttonDisable}>
+                    <button
+                      type="submit"
+                      className={classNamesButton}
+                      disabled={buttonDisable}>
                       Применить
                     </button>
                   )}

@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
-const useLockBodyScroll = (toggle: boolean) => {
+const useLockBodyScroll = (toggle: boolean, matchMediaValue: string) => {
   useEffect(() => {
-    document.body.style.overflow = toggle ? 'hidden' : 'visible';
-
+    if (window.matchMedia(matchMediaValue).matches) {
+      document.body.style.overflow = toggle ? 'hidden' : 'visible';
+    }
     return () => {
       document.body.style.overflow = 'visible';
     };

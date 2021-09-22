@@ -4,6 +4,9 @@ interface CssExports {
   active: string;
   background: string;
   buttonContainer: string;
+  buttonDisabled: string;
+  buttonReset: string;
+  buttonSubmit: string;
   container: string;
   content: string;
   formWrap: string;
