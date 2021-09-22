@@ -32,7 +32,8 @@ const FilterButton = ({ name, type }: Props) => {
 
   return (
     <div className={classNames} id={type} onClick={handleClick}>
-      {name}
+      <input id={type} type="checkbox" />
+      <label htmlFor={type}>{name}</label>
     </div>
   );
 };
