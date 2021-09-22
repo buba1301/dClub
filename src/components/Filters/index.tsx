@@ -13,7 +13,14 @@ type Props = {
 };
 
 const Filters = ({ filtersList }: Props) => {
-  const [activeClearFiltersButton] = React.useState(true);
+  const [
+    activeClearFiltersButton,
+    setActiveClearFiltersButton,
+  ] = React.useState(false);
+
+  const handleClose = () => {
+    setActiveClearFiltersButton(false);
+  };
 
   return (
     <div className={s.filtersContainer}>
@@ -24,14 +31,22 @@ const Filters = ({ filtersList }: Props) => {
             name={item.name}
             type={item.type}
             types={item.types}
+            activeClearFiltersButton={activeClearFiltersButton}
+            showCloseButton={setActiveClearFiltersButton}
           />
         ) : (
-          <FilterButton key={item.type} name={item.name} type={item.type} />
+          <FilterButton
+            key={item.type}
+            name={item.name}
+            type={item.type}
+            activeClearFiltersButton={activeClearFiltersButton}
+            showCloseButton={setActiveClearFiltersButton}
+          />
         ),
       )}
       {activeClearFiltersButton && (
         <div className={s.buttonContainer}>
-          <button type="button">
+          <button type="button" onClick={handleClose}>
             <GrClose size={20} />
           </button>
         </div>

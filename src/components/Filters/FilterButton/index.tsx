@@ -10,12 +10,24 @@ import s from './FilterButton.module.scss';
 type Props = {
   name: string;
   type: string;
+  showCloseButton: React.Dispatch<React.SetStateAction<boolean>>;
+  activeClearFiltersButton: boolean;
 };
 
-const FilterButton = ({ name, type }: Props) => {
+const FilterButton = ({
+  name,
+  type,
+  showCloseButton,
+  activeClearFiltersButton,
+}: Props) => {
   const [active, setActive] = React.useState(false);
 
+  React.useEffect(() => {
+    !activeClearFiltersButton && setActive(false);
+  }, [activeClearFiltersButton]);
+
   const handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
+    showCloseButton(true);
     setActive((prevState) => !prevState);
   };
 

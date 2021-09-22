@@ -17,9 +17,17 @@ type Props = {
   name: string;
   type: string;
   types: TypesList[];
+  showCloseButton: React.Dispatch<React.SetStateAction<boolean>>;
+  activeClearFiltersButton: boolean;
 };
 
-const DropMenuButton = ({ name, type, types }: Props) => {
+const DropMenuButton = ({
+  name,
+  type,
+  types,
+  showCloseButton,
+  activeClearFiltersButton,
+}: Props) => {
   const [openDrop, setOpenDrop] = React.useState(false);
   const [sortType, setSortType] = React.useState('');
   const [buttonDisable, setButtonDisable] = React.useState(true);
@@ -30,6 +38,12 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   const methods = useForm();
 
   // const dispatch = React.useContext(FiltersContext);
+
+  React.useEffect(() => {
+    !activeClearFiltersButton && setActiveFilterButton(false);
+    setSortType('');
+    methods.reset();
+  }, [activeClearFiltersButton]);
 
   React.useEffect(() => {
     const checkBoxStateValues = methods.getValues();
@@ -65,6 +79,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   const onSubmit = (data: any) => {
     setOpenDrop(false);
     setActiveFilterButton(true);
+    showCloseButton(true);
     // console.log('Form value', data);
   };
 
