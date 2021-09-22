@@ -30,7 +30,7 @@ const FilterButton = ({ name, type, active, setActiveFilters }: Props) => {
     );
 
     !active
-      ? dispatch({ type: 'addFilter', payload: type })
+      ? dispatch({ type: 'addFilter', payload: [type] })
       : dispatch({ type: 'removeFilter', payload: '' });
   };
 

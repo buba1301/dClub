@@ -43,7 +43,6 @@ function reducerActiveFilter(
 const Vendor = () => {
   const [currentTab, setCurrentTab] = React.useState<string>('restorant');
   const [filtersList, setFiltersList] = React.useState<FiltersItems[]>([]);
-  // const [vendorsData, setVendorsData] = React.useState([]);
   const [, dispatch] = React.useReducer(reducerActiveFilter, { type: '' });
 
   React.useEffect(() => {
