@@ -26,15 +26,15 @@ const filtersListOnPage: FiltersList = {
   shops: shopsFilters,
 };
 
-function reducerActiveFilters(
-  state: ActiveFilters[],
+function reducerActiveFilter(
+  state: ActiveFilters,
   action: Actions,
-): ActiveFilters[] {
+): ActiveFilters {
   switch (action.type) {
     case 'addFilter':
-      return [...state, { type: action.payload }];
+      return { ...state, type: action.payload };
     case 'removeFilter':
-      return state.filter(({ type }) => type !== action.payload);
+      return { type: action.payload };
     default:
       throw new Error();
   }
@@ -44,7 +44,7 @@ const Vendor = () => {
   const [currentTab, setCurrentTab] = React.useState<string>('restorant');
   const [filtersList, setFiltersList] = React.useState<FiltersItems[]>([]);
   // const [vendorsData, setVendorsData] = React.useState([]);
-  const [, dispatch] = React.useReducer(reducerActiveFilters, []);
+  const [, dispatch] = React.useReducer(reducerActiveFilter, { type: '' });
 
   React.useEffect(() => {
     setFiltersList(normalizeFiltersList(filtersListOnPage[currentTab]));

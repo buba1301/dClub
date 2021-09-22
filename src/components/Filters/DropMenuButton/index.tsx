@@ -9,6 +9,7 @@ import { TypesList } from '../../../utils/filters';
 import s from './DropMenu.module.scss';
 import useLockBodyScroll from '../../../hooks/useLockBodyScroll';
 import normalizeFiltersList from '../../../utils/normalize';
+// import FiltersContext from '../../../Context';
 
 type Props = {
   name: string;
@@ -28,6 +29,8 @@ const DropMenuButton = ({
   const [openDrop, setOpenDrop] = React.useState(false);
   const [buttonDisable, setButtonDisable] = React.useState(true);
   const [filtersTypes, setfiltersTypes] = React.useState<TypesList[]>([]);
+
+  // const dispatch = React.useContext(FiltersContext);
 
   const matchMediaValue = '(max-width: 640px)';
 
@@ -61,6 +64,11 @@ const DropMenuButton = ({
     const hasActiveFilter = filtersTypes.map((item) => item.active);
 
     setButtonDisable(!hasActiveFilter.includes(true));
+    setActiveFilters((prevState: any) =>
+      prevState.map((item: any) =>
+        item.type === type ? { ...item, active: false } : item,
+      ),
+    );
   }, [filtersTypes]);
 
   const handleClickOpen = () => {
@@ -98,13 +106,16 @@ const DropMenuButton = ({
     setfiltersTypes((prevState) => prevState.map(mapped));
   };
 
-  const onSubmit = (data: any) => {
+  const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setOpenDrop(false);
     setActiveFilters((prevState: any) =>
       prevState.map((item: any) =>
-        item.type === type ? { ...item, active: !item.active } : item,
+        item.type === type ? { ...item, active: true } : item,
       ),
     );
+    // запрос на сервер или в стейт в вендоре??
+    // dispatch({ type: 'addFilter', payload: })
   };
 
   useOnClickOutside(ref, handleClickOutside);
@@ -135,7 +146,7 @@ const DropMenuButton = ({
       {openDrop && (
         <>
           <div className={classNamesContainer} ref={ref}>
-            <form className={s.formWrap} onSubmit={onSubmit}>
+            <form className={s.formWrap} onSubmit={handleSubmit}>
               <div className={s.content}>
                 {filtersTypes &&
                   filtersTypes.map((item) => (
