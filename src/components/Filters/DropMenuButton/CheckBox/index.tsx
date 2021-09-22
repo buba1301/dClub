@@ -19,6 +19,13 @@ const CheckBox = ({ type, name, filterType, sortType, setSortType }: Props) => {
 
   const formValue = register(type as `${string}`);
 
+  React.useEffect(() => {
+    if (sortType === '') {
+      setActive(false);
+      reset();
+    }
+  }, [sortType]);
+
   const handleChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
     const { id } = event.currentTarget;
 

@@ -66,12 +66,7 @@ const DropMenuButton = ({ name, type, types }: Props) => {
 
   const matchMediaValue = '(max-width: 640px)';
 
-  const initState = types.reduce(
-    (acc, item) => ({ ...acc, [item.type]: false }),
-    {},
-  );
-
-  const methods = useForm(initState);
+  const methods = useForm();
   /* const [, dispatchCheckedFilters] = React.useReducer(reducerCheckedFilters, {
     checkedSortFilter: '',
     chekedKitchenFilters: [],
@@ -104,8 +99,8 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   };
 
   const handleReset = () => {
-    setSortType('');
     methods.reset();
+    setSortType('');
   };
 
   const onSubmit = (data: any) => null;
@@ -115,8 +110,6 @@ const DropMenuButton = ({ name, type, types }: Props) => {
   useOnClickOutside(ref, handleClickOutside);
 
   useLockBodyScroll(openDrop, matchMediaValue);
-
-  // const isDisable = checkedFiltersList.length === 0;
 
   const classNamesItemContainer = cn(s.itemContainer, {
     // [s.active]: active,
