@@ -1,5 +1,5 @@
 export type ActiveFilters = {
-  type: string | string[];
+  [key: string]: string[];
 };
 
 export type TypesList = {

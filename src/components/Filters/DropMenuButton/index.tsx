@@ -124,7 +124,7 @@ const DropMenuButton = ({
       .filter((item) => item.active)
       .map((item) => item.type);
     // запрос на сервер или в стейт в вендоре??
-    dispatch({ type: 'addFilter', payload: activeFilters });
+    dispatch({ type: 'addFilter', payload: { type: activeFilters } });
   };
 
   useOnClickOutside(ref, handleClickOutside);

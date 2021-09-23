@@ -18,7 +18,7 @@ type FiltersList = {
 
 export type Actions = {
   type: string;
-  payload: string | string[];
+  payload: string;
 };
 
 const filtersListOnPage: FiltersList = {
@@ -27,14 +27,14 @@ const filtersListOnPage: FiltersList = {
 };
 
 function reducerActiveFilter(
-  state: ActiveFilters,
+  state: Array<string | ActiveFilters>,
   action: Actions,
-): ActiveFilters {
+): Array<string | ActiveFilters> {
   switch (action.type) {
     case 'addFilter':
-      return { ...state, type: action.payload };
+      return [...state, action.payload];
     case 'removeFilter':
-      return { type: action.payload };
+      return state.filter((item) => item !== action.payload);
     default:
       throw new Error();
   }
@@ -43,7 +43,7 @@ function reducerActiveFilter(
 const Vendor = () => {
   const [currentTab, setCurrentTab] = React.useState<string>('restorant');
   const [filtersList, setFiltersList] = React.useState<FiltersItems[]>([]);
-  const [, dispatch] = React.useReducer(reducerActiveFilter, { type: '' });
+  const [, dispatch] = React.useReducer(reducerActiveFilter, []);
 
   React.useEffect(() => {
     setFiltersList(normalizeFiltersList(filtersListOnPage[currentTab]));
