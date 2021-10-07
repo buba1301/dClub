@@ -1,16 +1,19 @@
 import * as React from 'react';
+import axios from 'axios';
+// import { orderBy } from 'lodash';
 
 import s from './Vendor.module.scss';
+
 import Tabs from '../../components/Tabs';
 import Filters from '../../components/Filters';
 import {
   restorantFilters,
   FiltersItems,
   shopsFilters,
-  ActiveFilters,
 } from '../../utils/filters';
-import FiltersContext from '../../Context';
+// import FiltersContext from '../../Context';
 import normalizeFiltersList from '../../utils/normalize';
+import routes from '../../routes';
 
 type FiltersList = {
   [key: string]: FiltersItems[];
@@ -18,7 +21,7 @@ type FiltersList = {
 
 export type Actions = {
   type: string;
-  payload: string;
+  payload: string | string[];
 };
 
 const filtersListOnPage: FiltersList = {
@@ -26,36 +29,71 @@ const filtersListOnPage: FiltersList = {
   shops: shopsFilters,
 };
 
-function reducerActiveFilter(
-  state: Array<string | ActiveFilters>,
-  action: Actions,
-): Array<string | ActiveFilters> {
+/* type State = {
+  sort: string;
+  filters: Array<string | string[]>;
+};
+
+function reducerActiveFilter(state: State, action: Actions): State {
   switch (action.type) {
+    case 'addSort':
+      return { ...state, sort: action.payload };
     case 'addFilter':
-      return [...state, action.payload];
+      return { ...state, filters: [...state.filters, action.payload] };
     case 'removeFilter':
-      return state.filter((item) => item !== action.payload);
+      return {
+        ...state,
+        filters: state.filters.map((item) => item !== action.payload),
+      };
+    case 'removeAllFilters':
+      return { ...state, sort: '', filters: [] };
     default:
       throw new Error();
   }
-}
+} */
 
 const Vendor = () => {
   const [currentTab, setCurrentTab] = React.useState<string>('restorant');
   const [filtersList, setFiltersList] = React.useState<FiltersItems[]>([]);
-  const [, dispatch] = React.useReducer(reducerActiveFilter, []);
+  const [vendorsList, setVendorList] = React.useState([]);
 
   React.useEffect(() => {
     setFiltersList(normalizeFiltersList(filtersListOnPage[currentTab]));
   }, [currentTab]);
 
+  React.useEffect(() => {
+    const fetch = async () => {
+      try {
+        const res = await axios.get(routes.vendors());
+        setVendorList(res.data);
+      } catch (e) {
+        throw new Error();
+      }
+    };
+
+    fetch();
+  }, []);
+
+  // console.log('Vendor', vendorsList);
+  /* console.log(
+    'Vendor sort',
+    orderBy(vendorsList, 'rating', 'desc').map(({ rating }) => rating),
+  ); */
+
   return (
     <main className={s.container}>
       <Tabs setCurrentTab={setCurrentTab} />
-      <FiltersContext.Provider value={dispatch}>
-        {filtersList && <Filters filtersList={filtersList} />}
-      </FiltersContext.Provider>
-      <div className={s.vendorListContainer}>3</div>
+
+      {filtersList && <Filters filtersList={filtersList} />}
+
+      <div className={s.vendorListContainer}>
+        {vendorsList.map(({ id, name }: any) => (
+          <div className={s.cards} key={id}>
+            {name}
+          </div>
+        ))}
+      </div>
+
       <div className={s.moreButtonContainer}>4</div>
     </main>
   );
