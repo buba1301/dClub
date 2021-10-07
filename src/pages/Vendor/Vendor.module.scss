@@ -43,11 +43,11 @@
   cursor: pointer;
   border: 0;
   line-height: 56px;
+  transition: background 150ms linear;
 }
 
 .moreButtonContainer button:hover {
   background-color: #3f3f45;
-  transition: background 150ms linear;
 }
 
 @media (max-width: 1024px) {
