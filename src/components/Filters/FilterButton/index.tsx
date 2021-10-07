@@ -4,7 +4,7 @@ import * as React from 'react';
 import cn from 'classnames';
 
 import s from './FilterButton.module.scss';
-import FiltersContext from '../../../Context';
+// import FiltersContext from '../../../Context';
 
 // TODO: любимые если не авторизован то форма авторизации
 
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const FilterButton = ({ name, type, active, setActiveFilters }: Props) => {
-  const dispatch = React.useContext(FiltersContext);
+  // const setVendorList = React.useContext(FiltersContext);
 
   const handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
     const { id } = event.currentTarget;
@@ -28,10 +28,6 @@ const FilterButton = ({ name, type, active, setActiveFilters }: Props) => {
         item.type === id ? { ...item, active: !item.active } : item,
       ),
     );
-
-    !active
-      ? dispatch({ type: 'addFilter', payload: type })
-      : dispatch({ type: 'removeFilter', payload: type });
   };
 
   const classNames = cn(s.filterButton, {
