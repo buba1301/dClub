@@ -45,6 +45,11 @@
   .filtersContainer {
     overflow-x: scroll;
     scroll-behavior: smooth;
-    height: max-content;
+    scrollbar-width: none;
+  }
+
+  .filtersContainer::-webkit-scrollbar {
+    width: 0;
+    height: 0; /* Safari and Chrome */
   }
 }
