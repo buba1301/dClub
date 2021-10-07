@@ -53,18 +53,22 @@ function reducerActiveFilter(state: State, action: Actions): State {
 } */
 
 const Vendor = () => {
+  const vendorsCount = 12;
   const [currentTab, setCurrentTab] = React.useState<string>('restorant');
   const [filtersList, setFiltersList] = React.useState<FiltersItems[]>([]);
   const [vendorsList, setVendorList] = React.useState([]);
+  const [vendorsOnPage, setVendorsOnPage] = React.useState(12);
 
   React.useEffect(() => {
     setFiltersList(normalizeFiltersList(filtersListOnPage[currentTab]));
   }, [currentTab]);
 
   React.useEffect(() => {
+    console.log('vendorsOnPage', vendorsOnPage);
+
     const fetchVenorsList = async () => {
       try {
-        const res = await axios.get(routes.vendors());
+        const res = await axios.get(routes.vendors(vendorsOnPage));
         setVendorList(res.data);
       } catch (e) {
         throw new Error();
@@ -72,13 +76,17 @@ const Vendor = () => {
     };
 
     fetchVenorsList();
-  }, []);
+  }, [vendorsOnPage]);
 
   console.log('Vendor', vendorsList);
   console.log(
     'Vendor sort',
     orderBy(vendorsList, 'rating', 'desc').map(({ rating }) => rating),
   );
+
+  const handleClick = () => {
+    setVendorsOnPage((prevState) => prevState + vendorsCount);
+  };
 
   return (
     <main className={s.container}>
@@ -95,7 +103,9 @@ const Vendor = () => {
       </div>
 
       <div className={s.moreButtonContainer}>
-        <button type="button">Показать еще рестораны</button>
+        <button type="button" onClick={handleClick}>
+          Показать еще рестораны
+        </button>
       </div>
     </main>
   );
