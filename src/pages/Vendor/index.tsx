@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-// import { orderBy } from 'lodash';
+import { orderBy } from 'lodash';
 
 import s from './Vendor.module.scss';
 
@@ -62,7 +62,7 @@ const Vendor = () => {
   }, [currentTab]);
 
   React.useEffect(() => {
-    const fetch = async () => {
+    const fetchVenorsList = async () => {
       try {
         const res = await axios.get(routes.vendors());
         setVendorList(res.data);
@@ -71,14 +71,14 @@ const Vendor = () => {
       }
     };
 
-    fetch();
+    fetchVenorsList();
   }, []);
 
-  // console.log('Vendor', vendorsList);
-  /* console.log(
+  console.log('Vendor', vendorsList);
+  console.log(
     'Vendor sort',
     orderBy(vendorsList, 'rating', 'desc').map(({ rating }) => rating),
-  ); */
+  );
 
   return (
     <main className={s.container}>
@@ -94,7 +94,9 @@ const Vendor = () => {
         ))}
       </div>
 
-      <div className={s.moreButtonContainer}>4</div>
+      <div className={s.moreButtonContainer}>
+        <button type="button">Показать еще рестораны</button>
+      </div>
     </main>
   );
 };

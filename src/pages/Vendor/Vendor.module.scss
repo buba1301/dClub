@@ -30,8 +30,24 @@
 
 .moreButtonContainer {
   width: 100%;
-  height: 100px;
-  background-color: black;
+  height: 56px;
+  margin: 16px auto 32px;
+}
+
+.moreButtonContainer button {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background-color: #54545a;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+  line-height: 56px;
+}
+
+.moreButtonContainer button:hover {
+  background-color: #3f3f45;
+  transition: background 150ms linear;
 }
 
 @media (max-width: 1024px) {
