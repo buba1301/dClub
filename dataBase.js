@@ -33,8 +33,6 @@ const restorant = () => {
 module.exports = () => {
   const data = { restorants: [] };
   for (let i = 0; i < 100; i += 1) {
-    const item = restorant();
-    console.log('RES', item);
     data.restorants.push(restorant());
   }
   return data;
