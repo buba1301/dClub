@@ -4,17 +4,17 @@
 import * as React from 'react';
 import cn from 'classnames';
 import useOnClickOutside from '../../../hooks/useOnClickOutSide';
-import { TypesList } from '../../../utils/filters';
+import { filterTypesList } from '../../../utils/filters';
 
 import s from './DropMenu.module.scss';
 import useLockBodyScroll from '../../../hooks/useLockBodyScroll';
 import normalizeFiltersList from '../../../utils/normalize';
-import FiltersContext from '../../../Context';
+// import FiltersContext from '../../../Context';
 
 type Props = {
   name: string;
   type: string;
-  types: TypesList[];
+  filterTypes: filterTypesList[];
   active: boolean | undefined;
   setActiveFilters: Function;
 };
@@ -22,15 +22,17 @@ type Props = {
 const DropMenuButton = ({
   name,
   type,
-  types,
+  filterTypes,
   active,
   setActiveFilters,
 }: Props) => {
   const [openDrop, setOpenDrop] = React.useState(false);
   const [buttonDisable, setButtonDisable] = React.useState(true);
-  const [filtersTypes, setfiltersTypes] = React.useState<TypesList[]>([]);
+  const [activeFilterTypes, setActiveFilterTypes] = React.useState<
+    filterTypesList[]
+  >([]);
 
-  const dispatch = React.useContext(FiltersContext);
+  // const setVendorList = React.useContext(FiltersContext);
 
   const matchMediaValue = '(max-width: 640px)';
 
@@ -38,7 +40,7 @@ const DropMenuButton = ({
 
   const resetFilters = {
     resetfiltersTypes: () =>
-      setfiltersTypes((prevState) =>
+      setActiveFilterTypes((prevState) =>
         prevState.map((item) => ({ ...item, active: false })),
       ),
     resetActiveFilters: () =>
@@ -50,7 +52,7 @@ const DropMenuButton = ({
   };
 
   React.useEffect(() => {
-    setfiltersTypes(normalizeFiltersList(types));
+    setActiveFilterTypes(normalizeFiltersList(filterTypes));
   }, []);
 
   React.useEffect(() => {
@@ -61,7 +63,7 @@ const DropMenuButton = ({
   }, [active]);
 
   React.useEffect(() => {
-    const hasActiveFilter = filtersTypes.map((item) => item.active);
+    const hasActiveFilter = activeFilterTypes.map((item) => item.active);
 
     setButtonDisable(!hasActiveFilter.includes(true));
     setActiveFilters((prevState: any) =>
@@ -69,7 +71,7 @@ const DropMenuButton = ({
         item.type === type ? { ...item, active: false } : item,
       ),
     );
-  }, [filtersTypes]);
+  }, [activeFilterTypes]);
 
   const handleClickOpen = () => {
     !openDrop && setOpenDrop(true);
@@ -83,7 +85,6 @@ const DropMenuButton = ({
 
       if (!active) {
         resetFilters.resetfiltersTypes();
-        dispatch({ type: 'removeFilter', payload: [] });
       }
     }
   };
@@ -91,13 +92,12 @@ const DropMenuButton = ({
   const handleReset = () => {
     resetFilters.resetfiltersTypes();
     resetFilters.resetActiveFilters();
-    dispatch({ type: 'removeFilter', payload: [] });
   };
 
   const handleChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
 
-    const mapped = (item: TypesList) => {
+    const mapped = (item: filterTypesList) => {
       const currentItem = {
         ...item,
         active: !item.active,
@@ -108,7 +108,7 @@ const DropMenuButton = ({
       return item.type === value ? currentItem : otherItem;
     };
 
-    setfiltersTypes((prevState) => prevState.map(mapped));
+    setActiveFilterTypes((prevState) => prevState.map(mapped));
   };
 
   const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
@@ -119,12 +119,7 @@ const DropMenuButton = ({
         item.type === type ? { ...item, active: true } : item,
       ),
     );
-
-    const activeFilters = filtersTypes
-      .filter((item) => item.active)
-      .map((item) => item.type);
     // запрос на сервер или в стейт в вендоре??
-    dispatch({ type: 'addFilter', payload: { type: activeFilters } });
   };
 
   useOnClickOutside(ref, handleClickOutside);
@@ -157,8 +152,8 @@ const DropMenuButton = ({
           <div className={classNamesContainer} ref={ref}>
             <form className={s.formWrap} onSubmit={handleSubmit}>
               <div className={s.content}>
-                {filtersTypes &&
-                  filtersTypes.map((item) => (
+                {activeFilterTypes &&
+                  activeFilterTypes.map((item) => (
                     <label
                       htmlFor={item.type}
                       key={item.type}
