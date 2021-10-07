@@ -68,6 +68,11 @@
     scrollbar-width: none;
   }
 
+  .container::-webkit-scrollbar {
+    width: 0;
+    height: 0; /* Safari and Chrome */
+  }
+
   .buttonWrap {
     display: none;
   }
