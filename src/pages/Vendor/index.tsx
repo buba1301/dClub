@@ -6,12 +6,13 @@ import s from './Vendor.module.scss';
 
 import Tabs from '../../components/Tabs';
 import Filters from '../../components/Filters';
+import Card from '../../components/Card';
+
 import {
   restorantFilters,
   FiltersItems,
   shopsFilters,
 } from '../../utils/filters';
-// import FiltersContext from '../../Context';
 import normalizeFiltersList from '../../utils/normalize';
 import routes from '../../routes';
 
@@ -19,38 +20,10 @@ type FiltersList = {
   [key: string]: FiltersItems[];
 };
 
-export type Actions = {
-  type: string;
-  payload: string | string[];
-};
-
 const filtersListOnPage: FiltersList = {
   restorant: restorantFilters,
   shops: shopsFilters,
 };
-
-/* type State = {
-  sort: string;
-  filters: Array<string | string[]>;
-};
-
-function reducerActiveFilter(state: State, action: Actions): State {
-  switch (action.type) {
-    case 'addSort':
-      return { ...state, sort: action.payload };
-    case 'addFilter':
-      return { ...state, filters: [...state.filters, action.payload] };
-    case 'removeFilter':
-      return {
-        ...state,
-        filters: state.filters.map((item) => item !== action.payload),
-      };
-    case 'removeAllFilters':
-      return { ...state, sort: '', filters: [] };
-    default:
-      throw new Error();
-  }
-} */
 
 const Vendor = () => {
   const vendorsCount = 12;
@@ -64,8 +37,6 @@ const Vendor = () => {
   }, [currentTab]);
 
   React.useEffect(() => {
-    console.log('vendorsOnPage', vendorsOnPage);
-
     const fetchVenorsList = async () => {
       try {
         const res = await axios.get(routes.vendors(vendorsOnPage));
@@ -95,10 +66,8 @@ const Vendor = () => {
       {filtersList && <Filters filtersList={filtersList} />}
 
       <div className={s.vendorListContainer}>
-        {vendorsList.map(({ id, name }: any) => (
-          <div className={s.cards} key={id}>
-            {name}
-          </div>
+        {vendorsList.map((vendor: any) => (
+          <Card key={vendor.id} name={vendor.name} />
         ))}
       </div>
 
