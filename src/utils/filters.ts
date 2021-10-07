@@ -2,7 +2,7 @@ export type ActiveFilters = {
   [key: string]: string[];
 };
 
-export type TypesList = {
+export type filterTypesList = {
   name: string;
   type: string;
   active?: boolean;
@@ -11,7 +11,7 @@ export type TypesList = {
 export type FiltersItems = {
   type: string;
   name: string;
-  types?: TypesList[];
+  filterTypes?: filterTypesList[];
   active?: boolean;
 };
 
@@ -19,7 +19,7 @@ export const restorantFilters: FiltersItems[] = [
   {
     type: 'sort',
     name: '||',
-    types: [
+    filterTypes: [
       {
         type: 'forYou',
         name: 'Отобранные для вас',
@@ -53,7 +53,7 @@ export const restorantFilters: FiltersItems[] = [
   {
     type: 'kitchen',
     name: 'Кухни',
-    types: [
+    filterTypes: [
       {
         type: 'susi',
         name: 'Суши',
