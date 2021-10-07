@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import * as React from 'react';
 import { GrClose } from 'react-icons/gr';
-import FiltersContext from '../../Context';
 import { FiltersItems } from '../../utils/filters';
 import DropMenuButton from './DropMenuButton';
 import FilterButton from './FilterButton';
@@ -21,8 +20,6 @@ const Filters = ({ filtersList }: Props) => {
 
   const [activeFilters, setActiveFilters] = React.useState<FiltersItems[]>([]);
 
-  const dispatch = React.useContext(FiltersContext);
-
   React.useEffect(() => {
     setActiveFilters(filtersList);
   }, [filtersList]);
@@ -38,18 +35,17 @@ const Filters = ({ filtersList }: Props) => {
       prevState.map((item) => ({ ...item, active: false })),
     );
     setActiveClearFiltersButton(false);
-    dispatch({ type: 'removeFilter', payload: '' });
   };
 
   return (
     <div className={s.filtersContainer}>
       {activeFilters.map((item) =>
-        item.types ? (
+        item.filterTypes ? (
           <DropMenuButton
             key={item.type}
             name={item.name}
             type={item.type}
-            types={item.types}
+            filterTypes={item.filterTypes}
             active={item.active}
             setActiveFilters={setActiveFilters}
           />
@@ -75,5 +71,3 @@ const Filters = ({ filtersList }: Props) => {
 };
 
 export default Filters;
-
-// setActiveClearFiltersButton,
