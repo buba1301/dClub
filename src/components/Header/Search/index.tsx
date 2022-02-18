@@ -28,10 +28,15 @@ const Serach = () => {
 
   return (
     <>
-      <button type="button" className={s.searchContainer} onClick={handleClick}>
-        <GrSearch size={20} />
-        <span>Поиск</span>
-      </button>
+      {!searchToogle && (
+        <button
+          type="button"
+          className={s.searchContainer}
+          onClick={handleClick}>
+          <GrSearch data-testid="searchIcon" size={20} />
+          <span>Поиск</span>
+        </button>
+      )}
       {searchToogle && (
         <>
           <div className={s.inputContainer}>
@@ -45,7 +50,11 @@ const Serach = () => {
                 ref={ref}
               />
               <div className={s.iconsRight}>
-                <GrClose size={20} onClick={handleClick} />
+                <GrClose
+                  size={20}
+                  data-testid="closeIcon"
+                  onClick={handleClick}
+                />
               </div>
             </div>
           </div>

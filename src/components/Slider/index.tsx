@@ -1,5 +1,6 @@
 import * as React from 'react';
 import cn from 'classnames';
+import { chunk } from 'lodash';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import SliderCard from './SliderCard';
 
@@ -23,6 +24,10 @@ const shiftValues: ShiftValues = {
 const getShiftValue = (key: string): number => shiftValues[key];
 
 const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+const chunkList = chunk(data, 5);
+
+console.log('Slider', chunkList);
 
 const Slider = () => {
   const itemPerPage = 4;
@@ -52,7 +57,10 @@ const Slider = () => {
   const handleClickLeft = () => {
     setPage((prevState) => prevState - 1);
 
-    const prewPageList = list.slice(firstIndexNextPage - itemPerPage, lastIndexNextPage - itemPerPage - 1);
+    const prewPageList = list.slice(
+      firstIndexNextPage - itemPerPage,
+      lastIndexNextPage - itemPerPage - 1,
+    );
 
     const shiftValue = getShiftValue(prewPageList.length.toString());
 
@@ -78,12 +86,18 @@ const Slider = () => {
           ))}
         </div>
         {page !== lastPage && (
-          <button className={classNamesRight} type="button" onClick={handleClickRight}>
+          <button
+            className={classNamesRight}
+            type="button"
+            onClick={handleClickRight}>
             <FiChevronRight />
           </button>
         )}
         {page !== firstPage && (
-          <button className={classNamesLeft} type="button" onClick={handleClickLeft}>
+          <button
+            className={classNamesLeft}
+            type="button"
+            onClick={handleClickLeft}>
             <FiChevronLeft />
           </button>
         )}

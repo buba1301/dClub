@@ -21,3 +21,6 @@ test:
 
 serve:
 	yarn run server-data
+
+test:
+	npm run test
