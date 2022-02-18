@@ -39,7 +39,11 @@ const Serach = () => {
               <div className={s.iconsLeft}>
                 <GrSearch size={20} />
               </div>
-              <input type="text" placeholder="Ресторан, блюдо или товар" ref={ref} />
+              <input
+                type="text"
+                placeholder="Ресторан, блюдо или товар"
+                ref={ref}
+              />
               <div className={s.iconsRight}>
                 <GrClose size={20} onClick={handleClick} />
               </div>
@@ -53,15 +57,3 @@ const Serach = () => {
 };
 
 export default Serach;
-
-/* {searchData.length !== 0 && (
-            <div className={s.listWrap}>
-              {console.log('!!!!')}
-            </div>
-          )} */
-
-/*
-position: fixed;
-  top: 0px;
-  left: 0px;
-*/
