@@ -2,7 +2,13 @@ module.exports = {
   env: {
     browser: true,
   },
-  extends: ['airbnb', 'airbnb/hooks', 'react-app', 'prettier', 'prettier/react'],
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+    'react-app',
+    'prettier',
+    'prettier/react',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -13,9 +19,14 @@ module.exports = {
   },
   plugins: ['prettier', 'prettier', 'react', '@typescript-eslint'],
   rules: {
+    'no-console': 'warn',
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
-    'no-console': 'error',
-    'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx', '.ts', '.js'] }],
+    'react/jsx-filename-extension': [
+      'error',
+      { extensions: ['.jsx', '.tsx', '.ts', '.js'] },
+    ],
     'import/extensions': [
       'error',
       'ignorePackages',

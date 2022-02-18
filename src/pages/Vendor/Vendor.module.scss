@@ -1,0 +1,48 @@
+.container {
+  position: relative;
+  width: 100%;
+  min-height: calc(100% - 72px - 198px - 321px);
+  display: grid;
+  grid-template-rows: repeat(2, auto) 1fr auto;
+
+  padding: 0 72px;
+}
+
+.vendorListContainer {
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  padding-top: 7px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(343px, 1fr));
+  grid-gap: 20px;
+}
+
+.moreButtonContainer {
+  width: 100%;
+  height: 56px;
+  margin: 16px auto 32px;
+}
+
+.moreButtonContainer button {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background-color: #54545a;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+  line-height: 56px;
+  transition: background 150ms linear;
+}
+
+.moreButtonContainer button:hover {
+  background-color: #3f3f45;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 16px;
+  }
+}

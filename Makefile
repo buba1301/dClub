@@ -20,4 +20,4 @@ test:
 	npx jest --watch
 
 serve:
-	node dist/server.js
+	yarn run server-data

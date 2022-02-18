@@ -1,0 +1,35 @@
+.buttonContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 24px auto;
+  justify-content: center;
+  align-content: center;
+  grid-gap: 5px;
+  border-style: none;
+  border-right: 1px solid #e3e4e6;
+  background-color: white;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.buttonContainer span {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .buttonContainer {
+    grid-template-columns: auto;
+    grid-column: 2 / 3;
+    padding: 8px 16px;
+    border: none;
+    height: 50px;
+    border-radius: 12px;
+    background-color: #f6f6f6;
+  }
+
+  .buttonContainer span {
+    display: none;
+  }
+}

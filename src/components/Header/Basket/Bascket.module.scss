@@ -1,0 +1,29 @@
+.basketContainer {
+  display: grid;
+  grid-template-columns: 24px auto;
+  justify-content: center;
+  align-content: center;
+  grid-gap: 5px;
+  cursor: default;
+}
+
+.basketContainer span {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.empty {
+  background-color: #fff;
+}
+
+.notEmpty {
+  background-color: #0ec645;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .basketContainer {
+    display: none;
+  }
+}

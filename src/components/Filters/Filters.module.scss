@@ -1,0 +1,55 @@
+.filtersContainer {
+  width: 100%;
+  height: 100px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 18px;
+}
+
+.itemContainer {
+  height: 44px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+
+  background-color: #f6f6f6;
+  cursor: pointer;
+  padding: 12px 16px;
+}
+
+.itemContainer:hover {
+  background-color: #ecedf0;
+}
+
+.buttonContainer {
+  width: 44px;
+  height: 44px;
+  margin-left: 600px;
+}
+
+.buttonContainer button {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.12);
+  background: #fff;
+}
+
+@media (max-width: 1024px) {
+  .filtersContainer {
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  .filtersContainer::-webkit-scrollbar {
+    width: 0;
+    height: 0; /* Safari and Chrome */
+  }
+}

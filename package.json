@@ -1,5 +1,5 @@
 {
-  "name": "Test-task--shopping-",
+  "name": "dclub",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/buba1301/Test-task--shopping.git",
@@ -8,12 +8,21 @@
   "scripts": {
     "build:dev": "env NODE_ENV=development webpack --config webpack.config.js",
     "build:prod": "env NODE_ENV=production webpack --config webpack.config.js",
-    "start": "env NODE_ENV=development webpack-dev-server"
+    "start": "env NODE_ENV=development webpack-dev-server",
+    "server": "npx json-server --watch db.json --port 3004",
+    "server-data": "npx json-server dataBase.js --port 3004"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.173",
+    "axios": "^0.21.4",
     "classnames": "^2.2.6",
+    "faker": "^5.5.3",
+    "json-server": "^0.16.3",
+    "lodash": "^4.17.21",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-hook-form": "^7.15.4",
+    "react-icons": "^4.2.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.11",

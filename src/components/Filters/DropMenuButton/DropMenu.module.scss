@@ -1,0 +1,165 @@
+.itemContainer {
+  height: 44px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+
+  background-color: #f6f6f6;
+  cursor: pointer;
+  padding: 12px 16px;
+}
+
+.itemContainer:hover {
+  background-color: #ecedf0;
+}
+
+.active {
+  background: #2e2e33;
+  color: #fff;
+}
+
+.active:hover {
+  background: #46464e;
+}
+
+.kitchenFilter {
+  left: 372px;
+}
+
+.sortFilter {
+  left: 72px;
+}
+
+.container {
+  position: absolute;
+  top: 180px;
+  width: 316px;
+  height: auto;
+  padding: 30px 32px 16px 32px;
+  border-radius: 16px;
+  background-color: #f6f6f6;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background {
+  display: none;
+}
+
+.formWrap {
+  width: 100%;
+  max-height: 365px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background-color: #f6f6f6;
+}
+
+.content {
+  width: 252px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  overflow: auto;
+}
+
+.itemWrap {
+  width: 100%;
+  height: 32px;
+  padding: 6px 0;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.itemWrap input {
+  cursor: pointer;
+}
+
+.buttonContainer {
+  width: 100%;
+  height: 72px;
+
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.buttonContainer button {
+  width: 100%;
+  height: 48px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 0;
+  text-align: center;
+}
+
+.buttonContainer button:hover {
+  transition: background 150ms linear;
+}
+
+.buttonReset:hover {
+  background-color: #e3e4e6;
+}
+
+.buttonSubmit {
+  background-color: #10b93d;
+  color: #fff;
+}
+
+.buttonDisabled {
+  filter: opacity(0.5);
+}
+
+@media (max-width: 1024px) {
+  .kitchenFilter {
+    left: 316px;
+  }
+
+  .sortFilter {
+    left: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    top: unset;
+    height: auto;
+    border-radius: 16px 16px 0px 0px;
+    animation: 0.2s ease-out 0s 1 slideInFromBottom;
+    transition: margin-bottom 0.2s ease-out;
+    z-index: 60000;
+    overflow: hidden;
+  }
+
+  .background {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 50000;
+  }
+
+  .formWrap {
+    max-height: none;
+    align-items: flex-start;
+  }
+}
