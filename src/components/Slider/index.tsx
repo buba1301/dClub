@@ -5,89 +5,83 @@ import SliderCard from './SliderCard';
 
 import s from './Slider.module.scss';
 
-// TODO: убрать скрол бар в хроме
 // TODO: добавить переходы по карточкам
 
-type ShiftValues = {
-  [key: string]: number;
+const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+
+type State = {
+  scroller: HTMLDivElement | null;
+  itemWidth: number | undefined;
 };
-
-const shiftValues: ShiftValues = {
-  '1': 146,
-  '2': 438,
-  '3': 730,
-  '4': 950,
-  '5': 1128,
-};
-
-const getShiftValue = (key: string): number => shiftValues[key];
-
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 const Slider = () => {
-  const itemPerPage = 4;
+  const shiftValue = 4;
+  const pageCount = Math.floor(data.length / shiftValue);
 
-  const [list] = React.useState(data);
-  const [page, setPage] = React.useState(1);
-  const [firstIndexNextPage, setFirstIndex] = React.useState(4);
-  const [lastIndexNextPage, setLastIndex] = React.useState(9);
-  const [shiftPage, setShiftPage] = React.useState(0);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
-  const firstPage = 1;
-  const lastPage = Math.ceil(list.length / 4);
+  const [pageShift, setPageShift] = React.useState<number>(0);
+
+  const [stateUI, setStateUI] = React.useState<State>({
+    scroller: null,
+    itemWidth: 0,
+  });
+
+  React.useEffect(() => {
+    const scroller = containerRef.current;
+    const itemWidth = containerRef.current?.firstElementChild?.clientWidth;
+
+    setStateUI({ ...stateUI, scroller, itemWidth });
+  }, []);
 
   const handleClickRight = () => {
-    setPage((prevState) => prevState + 1);
+    stateUI.scroller?.scrollBy({
+      left: stateUI.itemWidth! * shiftValue,
+      top: 0,
+      behavior: 'smooth',
+    });
 
-    const nextPageList = list.slice(firstIndexNextPage, lastIndexNextPage);
-
-    const shiftValue = getShiftValue(nextPageList.length.toString());
-
-    setFirstIndex((prevState) => prevState + itemPerPage);
-    setLastIndex((prevState) => prevState + itemPerPage + 1);
-
-    setShiftPage((prevState) => prevState + shiftValue);
+    setPageShift((prevState) => prevState + 1);
   };
 
   const handleClickLeft = () => {
-    setPage((prevState) => prevState - 1);
+    stateUI.scroller?.scrollBy({
+      left: -stateUI.itemWidth! * shiftValue,
+      top: 0,
+      behavior: 'smooth',
+    });
 
-    const prewPageList = list.slice(firstIndexNextPage - itemPerPage, lastIndexNextPage - itemPerPage - 1);
-
-    const shiftValue = getShiftValue(prewPageList.length.toString());
-
-    setFirstIndex((prevState) => prevState - itemPerPage);
-    setLastIndex((prevState) => prevState - itemPerPage - 1);
-
-    setShiftPage((prevState) => prevState - shiftValue);
-  };
-
-  const style = {
-    left: `-${shiftPage}px`,
+    setPageShift((prevState) => prevState - 1);
   };
 
   const classNamesRight = cn(s.buttonWrap, s.right);
   const classNamesLeft = cn(s.buttonWrap, s.left);
 
   return (
-    <div className={s.mainContainer}>
-      <div className={s.wrap}>
-        <div className={s.container} style={style}>
-          {data.map((item) => (
-            <SliderCard key={item}>{item}</SliderCard>
-          ))}
-        </div>
-        {page !== lastPage && (
-          <button className={classNamesRight} type="button" onClick={handleClickRight}>
-            <FiChevronRight />
-          </button>
-        )}
-        {page !== firstPage && (
-          <button className={classNamesLeft} type="button" onClick={handleClickLeft}>
-            <FiChevronLeft />
-          </button>
-        )}
+    <div className={s.wrap}>
+      <div className={s.container} ref={containerRef}>
+        {data.map((item) => (
+          <SliderCard key={item} id={item}>
+            {item}
+          </SliderCard>
+        ))}
       </div>
+      {pageShift < pageCount && (
+        <button
+          className={classNamesRight}
+          type="button"
+          onClick={handleClickRight}>
+          <FiChevronRight />
+        </button>
+      )}
+      {pageShift > 0 && (
+        <button
+          className={classNamesLeft}
+          type="button"
+          onClick={handleClickLeft}>
+          <FiChevronLeft />
+        </button>
+      )}
     </div>
   );
 };
