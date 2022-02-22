@@ -10,8 +10,9 @@ import s from './Search.module.scss';
 // TODO: сделать инпут слошным
 // TODO: добавить спинер при поиске вместо лупы
 
-const Serach = () => {
+const Search = () => {
   const [searchToogle, setSearchToogle] = React.useState(false);
+  const [searchValue, setSearchValue] = React.useState<string>('');
   const [searchData, setSearchData] = React.useState<string[]>([]);
 
   const ref = React.useRef<HTMLInputElement>(null);
@@ -24,6 +25,11 @@ const Serach = () => {
 
   const handleClick = () => {
     setSearchToogle((prevState) => !prevState);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearchValue(value);
   };
 
   return (
@@ -48,6 +54,8 @@ const Serach = () => {
                 type="text"
                 placeholder="Ресторан, блюдо или товар"
                 ref={ref}
+                value={searchValue}
+                onChange={handleChange}
               />
               <div className={s.iconsRight}>
                 <GrClose
@@ -65,4 +73,4 @@ const Serach = () => {
   );
 };
 
-export default Serach;
+export default Search;
